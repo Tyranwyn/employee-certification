@@ -4,8 +4,11 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
+import { CertificatesModule } from './certificates/certificates.module';
 import { CoreModule } from './core/core.module';
 import { EmployeesModule } from './employees/employees.module';
+import { ProjectsModule } from './projects/projects.module';
+import { QuestionsModule } from './questions/questions.module';
 import { SkillsModule } from './skills/skills.module';
 
 @NgModule({
@@ -20,9 +23,14 @@ import { SkillsModule } from './skills/skills.module';
       { enableTracing: true }
     ),
     EmployeesModule,
-    SkillsModule
+    SkillsModule,
+    ProjectsModule,
+    QuestionsModule,
+    SkillsModule,
+    CertificatesModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
