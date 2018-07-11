@@ -6,10 +6,11 @@ import { AppComponent } from './app.component';
 import { appRoutes } from './app.routes';
 import { CoreModule } from './core/core.module';
 import { EmployeesModule } from './employees/employees.module';
+import { SkillsModule } from './skills/skills.module';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     BrowserModule,
@@ -18,7 +19,8 @@ import { EmployeesModule } from './employees/employees.module';
       appRoutes,
       { enableTracing: true }
     ),
-    EmployeesModule
+    EmployeesModule,
+    SkillsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
