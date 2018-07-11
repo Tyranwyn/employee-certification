@@ -11,6 +11,8 @@ import { ProjectsComponent } from './projects/projects.component';
 import { CertificatesComponent } from './certificates/certificates.component';
 import { SkillsComponent } from './skills/skills.component';
 import { ChatComponent } from './chat/chat.component';
+import { EmployeeComponent } from './employees/employee/employee.component';
+import { EmployeeListComponent } from './employees/employee-list/employee-list.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import { ChatComponent } from './chat/chat.component';
     ProjectsComponent,
     CertificatesComponent,
     SkillsComponent,
-    ChatComponent
+    ChatComponent,
+    EmployeeComponent,
+    EmployeeListComponent
   ],
   imports: [
     BrowserModule,

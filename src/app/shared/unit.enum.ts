@@ -1,0 +1,6 @@
+export enum Unit {
+  JAVA,
+  MICROSOFT,
+  SALESFORCE,
+  CONNECTED_COMPANY
+}
