@@ -7,6 +7,7 @@ import { appRoutes } from './app.routes';
 import { CertificatesModule } from './certificates/certificates.module';
 import { CertificateFireStoreService } from './certificates/shared/certificate-fire-store.service';
 import { CertificateService } from './certificates/shared/certificate.service';
+import { ChatModule } from './chat/chat.module';
 import { CoreModule } from './core/core.module';
 import { EmployeesModule } from './employees/employees.module';
 import { EmployeeFireStoreService } from './employees/shared/employee-fire-store.service';
@@ -36,7 +37,8 @@ import { SkillsModule } from './skills/skills.module';
     SkillsModule,
     ProjectsModule,
     QuestionsModule,
-    CertificatesModule
+    CertificatesModule,
+    ChatModule
   ],
   providers: [
     { provide: EmployeeService, useClass: EmployeeFireStoreService },
