@@ -1,0 +1,103 @@
+import { NgModule, Optional, SkipSelf } from '@angular/core';
+import { throwIfAlreadyLoaded } from '../module-import-guard';
+import { ToastModule } from '../toast/toast.module';
+import {
+  MatAutocompleteModule, MatBadgeModule,
+  MatBottomSheetModule, MatButtonModule,
+  MatButtonToggleModule, MatCardModule,
+  MatCheckboxModule, MatChipsModule,
+  MatDatepickerModule, MatDialogModule,
+  MatDividerModule, MatExpansionModule,
+  MatFormFieldModule, MatGridListModule,
+  MatIconModule, MatInputModule,
+  MatListModule, MatMenuModule,
+  MatPaginatorModule, MatProgressBarModule,
+  MatProgressSpinnerModule, MatRadioModule,
+  MatSelectModule, MatSidenavModule,
+  MatSliderModule, MatSlideToggleModule,
+  MatSnackBarModule, MatSortModule,
+  MatStepperModule, MatTableModule,
+  MatTabsModule, MatToolbarModule,
+  MatTooltipModule, MatTreeModule
+} from '@angular/material';
+
+@NgModule({
+  imports: [
+    MatMenuModule,
+    MatFormFieldModule,
+    MatSnackBarModule,
+    MatCheckboxModule,
+    MatDividerModule,
+    MatSliderModule,
+    MatIconModule,
+    MatTreeModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatTooltipModule,
+    MatButtonToggleModule,
+    MatProgressBarModule,
+    MatRadioModule,
+    MatListModule,
+    MatStepperModule,
+    MatGridListModule,
+    MatTabsModule,
+    MatBottomSheetModule,
+    MatAutocompleteModule,
+    MatChipsModule,
+    MatExpansionModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatSortModule,
+    MatInputModule,
+    MatSelectModule,
+    MatPaginatorModule,
+    MatBadgeModule,
+    MatDialogModule,
+    MatSlideToggleModule,
+    MatDatepickerModule
+  ],
+  exports: [
+    MatMenuModule,
+    MatFormFieldModule,
+    MatSnackBarModule,
+    MatCheckboxModule,
+    MatDividerModule,
+    MatSliderModule,
+    MatIconModule,
+    MatTreeModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatProgressSpinnerModule,
+    MatTableModule,
+    MatTooltipModule,
+    MatButtonToggleModule,
+    MatProgressBarModule,
+    MatRadioModule,
+    MatListModule,
+    MatStepperModule,
+    MatGridListModule,
+    MatTabsModule,
+    MatBottomSheetModule,
+    MatAutocompleteModule,
+    MatChipsModule,
+    MatExpansionModule,
+    MatToolbarModule,
+    MatCardModule,
+    MatSortModule,
+    MatInputModule,
+    MatSelectModule,
+    MatPaginatorModule,
+    MatBadgeModule,
+    MatDialogModule,
+    MatSlideToggleModule,
+    MatDatepickerModule
+  ],
+  declarations: []
+})
+export class MaterialModule {
+  constructor(@Optional() @SkipSelf() parentModule: ToastModule) {
+    throwIfAlreadyLoaded(parentModule, 'MaterialModule');
+  }
+}

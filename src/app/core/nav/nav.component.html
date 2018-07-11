@@ -1,0 +1,4 @@
+<mat-toolbar color="primary">
+  <span>R Skillz</span>
+  <a mat-button *ngFor="let item of menuItems" [routerLink]="item.link">{{item.caption}}</a>
+</mat-toolbar>
