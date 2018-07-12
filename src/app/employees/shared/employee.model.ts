@@ -1,3 +1,4 @@
+import { DocumentReference } from 'angularfire2/firestore';
 import { Role } from '../../shared/role.enum';
 import { Unit } from '../../shared/unit.enum';
 
@@ -11,8 +12,8 @@ export interface Employee {
   email: string;
   password: string;
   employed: boolean;
-  skills: any[];
-  certificate: any[];
-  projects: any[];
-  questions: any[];
+  skills: DocumentReference[];
+  certificates: DocumentReference[];
+  projects: DocumentReference[];
+  questions: DocumentReference[];
 }

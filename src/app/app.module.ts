@@ -12,6 +12,7 @@ import { CertificateFireStoreService } from './certificates/shared/certificate-f
 import { CertificateService } from './certificates/shared/certificate.service';
 import { ChatModule } from './chat/chat.module';
 import { CoreModule } from './core/core.module';
+import { MaterialModule } from './core/material/material.module';
 import { EmployeesModule } from './employees/employees.module';
 import { EmployeeFireStoreService } from './employees/shared/employee-fire-store.service';
 import { EmployeeService } from './employees/shared/employee.service';
@@ -34,7 +35,7 @@ import { SkillsModule } from './skills/skills.module';
     CoreModule,
     RouterModule.forRoot(
       appRoutes,
-      { enableTracing: true }
+      { enableTracing: false }
     ),
     AngularFireModule.initializeApp(environment.firebase),
     AngularFirestoreModule,
