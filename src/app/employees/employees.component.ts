@@ -17,13 +17,7 @@ import { EmployeeService } from './shared/employee.service';
 })
 export class EmployeesComponent implements OnInit {
 
-  dataSource: EmployeeListDto[];
-  expandedElement: EmployeeListDto;
-  displayedColumns = ['firstName', 'lastName', 'unit', 'skills', 'certificates', 'projects'];
-
-  constructor(public employeeService: EmployeeService) {
-    this.dataSource = employeeService.getEmployedEmployees();
-  }
+  constructor() {}
 
   ngOnInit() {
   }
