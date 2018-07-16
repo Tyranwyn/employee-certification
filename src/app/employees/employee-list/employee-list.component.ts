@@ -1,7 +1,9 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
+import { Observable } from 'rxjs';
 import { EmployeeListDto } from '../shared/employee-list-dto';
+import { Employee } from '../shared/employee.model';
 import { EmployeeService } from '../shared/employee.service';
 
 @Component({
@@ -19,11 +21,13 @@ import { EmployeeService } from '../shared/employee.service';
 export class EmployeeListComponent implements OnInit {
 
   dataSource: MatTableDataSource<EmployeeListDto> = new MatTableDataSource<EmployeeListDto>();
-  expandedElement: EmployeeListDto;
+  observableDataSource: Observable<EmployeeListDto[]>;
+  expandedElement: Employee;
   displayedColumns = ['firstName', 'lastName', 'unit', 'skills', 'certificates', 'projects'];
 
   constructor(employeeService: EmployeeService) {
     this.dataSource.data = employeeService.getEmployedEmployees();
+    // this.observableDataSource = employeeService.getEmployedEmployeesObservable();
   }
   ngOnInit() {
     this.dataSource.filterPredicate = (data: EmployeeListDto, filter: string) => {

@@ -1,10 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentData } from 'angularfire2/firestore';
+import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { Certificate } from '../../certificates/shared/certificate.model';
 import { Project } from '../../projects/shared/project.model';
-import { Role } from '../../shared/role.enum';
-import { Unit } from '../../shared/unit.enum';
 import { Skill } from '../../skills/shared/skill.model';
 import { EmployeeListDto } from './employee-list-dto';
 import { Employee } from './employee.model';
@@ -24,9 +23,25 @@ export class EmployeeFireStoreService implements EmployeeService {
     return this.db.collection<Employee>('employees').valueChanges();
   }
 
+  getEmployedEmployeesObservable(): Observable<Employee[]> {
+    let employeeList: Observable<Employee[]>;
+    employeeList = this.db.collection<Employee>('employees', ref => ref.where('employed', '==', true))
+      .snapshotChanges()
+      .pipe(
+        map(actions => {
+          return actions.map(a => {
+            const data = a.payload.doc.data() as Employee;
+            const id = a.payload.doc.id;
+            console.log({id, ...data});
+            return {id, ...data};
+          });
+        })
+      );
+    return employeeList;
+  }
+
   // TODO: Get references properly once eager loading implemented
   getEmployedEmployees(): EmployeeListDto[] {
-    // return this.db.collection<EmployeeListDto>('employees', ref => ref.where('employed', '==', true)).valueChanges();
     const employeeList: EmployeeListDto[] = [];
     this.db.collection<EmployeeListDto>('employees')
       .ref
