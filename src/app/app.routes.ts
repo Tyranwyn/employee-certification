@@ -9,7 +9,6 @@ import { SkillsComponent } from './skills/skills.component';
 export const appRoutes: Routes = [
   { path: 'questions', component: QuestionsComponent },
   { path: 'employees', component: EmployeesComponent },
-  { path: 'employees', component: EmployeesComponent },
   { path: 'projects', component: ProjectsComponent },
   { path: 'certificates', component: CertificatesComponent },
   { path: 'skills', component: SkillsComponent },

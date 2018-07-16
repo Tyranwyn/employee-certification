@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { SafePipeModule } from 'safe-pipe';
 import { MaterialModule } from '../core/material/material.module';
 import { ProjectComponent } from './project/project.component';
 import { ProjectListComponent } from './project-list/project-list.component';
@@ -11,7 +12,8 @@ import { projectsRoutes } from './projects.routes';
   imports: [
     CommonModule,
     MaterialModule,
-    RouterModule.forRoot(projectsRoutes)
+    RouterModule.forRoot(projectsRoutes),
+    SafePipeModule
   ],
   declarations: [
     ProjectsComponent,

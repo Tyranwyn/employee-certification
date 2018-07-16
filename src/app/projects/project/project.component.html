@@ -1,3 +1,10 @@
-<p>
-  project works!
-</p>
+<div *ngIf="currentProject">
+  <h1>{{currentProject.name}}</h1>
+  <p>Client: {{currentProject.client}}</p>
+  <p>Project still active? {{currentProject.active ? 'yes' : 'no'}}</p>
+  <p>Project location: {{currentProject.location}}</p>
+</div>
+<mat-progress-spinner *ngIf="!currentProject"
+  class="spinner"
+  mode="indeterminate">
+</mat-progress-spinner>

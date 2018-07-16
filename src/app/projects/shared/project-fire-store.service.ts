@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from 'angularfire2/firestore';
+import { Observable } from 'rxjs';
 import { EmployeeListDto } from '../../employees/shared/employee-list-dto';
 import { Skill } from '../../skills/shared/skill.model';
 import { ProjectListDto } from './project-list-dto';
@@ -11,8 +12,8 @@ export class ProjectFireStoreService implements ProjectService {
 
   constructor(private db: AngularFirestore) {}
 
-  getProjectById(): Project {
-    return undefined;
+  getProjectById(id: string): Observable<Project> {
+    return this.db.doc<Project>('/projects/' + id).valueChanges();
   }
 
   // TODO: Get references properly once eager loading implemented

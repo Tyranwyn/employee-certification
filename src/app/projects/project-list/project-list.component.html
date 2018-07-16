@@ -1,34 +1,78 @@
-<mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
-</mat-form-field>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav position="end" mode="side" class="project-sidenav-bar">
+    <div *ngIf="currentProject">
+      <div style="margin: 4em 2em">
+        <h1>{{currentProject.name}}</h1>
+        <p>Client: {{currentProject.client}}</p>
+        <p>Project still active? {{currentProject.active ? 'yes' : 'no'}}</p>
+        <p>Project location: {{currentProject.location}}</p>
+      </div>
+      <div *ngIf="currentProjectResponsible.length != 0" style="margin: 2em 0">
+        <mat-card *ngFor="let employee of currentProjectResponsible">
+          <mat-card-header>
+            <div mat-card-avatar *ngIf="employee.profilePicture !== ''" [style.background-image]="'url(' + employee.profilePicture + ')' | safe: 'style'"
+                 style="background-position: center; background-size: cover;"></div>
+            <div mat-card-avatar *ngIf="employee.profilePicture === ''"
+                 style="background: url('../../../assets/temp-profile-placeholder.png') center;background-size: cover;"></div>
+            <mat-card-title>{{employee.firstName}} {{employee.lastName}}</mat-card-title>
+            <mat-card-subtitle>{{employee.role}}</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+      <div *ngIf="currentProjectCollaborators.length != 0" style="margin: 2em 0">
+        <mat-card *ngFor="let employee of currentProjectCollaborators">
+          <mat-card-header>
+            <div mat-card-avatar *ngIf="employee.profilePicture !== ''" [style.background-image]="'url(' + employee.profilePicture + ')' | safe: 'style'"
+                 style="background-position: center; background-size: cover;"></div>
+            <div mat-card-avatar *ngIf="employee.profilePicture === ''"
+                 style="background: url('../../../assets/temp-profile-placeholder.png') center;background-size: cover;"></div>
+            <mat-card-title>{{employee.firstName}} {{employee.lastName}}</mat-card-title>
+            <mat-card-subtitle>{{employee.role}}</mat-card-subtitle>
+          </mat-card-header>
+        </mat-card>
+      </div>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-form-field>
+      <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+    </mat-form-field>
 
-<mat-table *ngIf="dataSource.data[0]" [dataSource]="dataSource">
+    <mat-table *ngIf="dataSource.data[0]" [dataSource]="dataSource">
 
-  <ng-container matColumnDef="id">
-    <mat-header-cell *matHeaderCellDef>Identifier</mat-header-cell>
-    <mat-cell *matCellDef="let project">{{project.id}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
-    <mat-cell *matCellDef="let project">{{project.name}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="client">
-    <mat-header-cell *matHeaderCellDef>Client</mat-header-cell>
-    <mat-cell *matCellDef="let project">{{project.client}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="location">
-    <mat-header-cell *matHeaderCellDef>Location</mat-header-cell>
-    <mat-cell *matCellDef="let project">{{project.location}}</mat-cell>
-  </ng-container>
-  <ng-container matColumnDef="skillsUsed">
-    <mat-header-cell *matHeaderCellDef>Skills</mat-header-cell>
-    <mat-cell *matCellDef="let project">
-      <mat-chip-list>
-        <mat-chip *ngFor="let skill of project.skillsUsed">{{skill.name}}</mat-chip>
-      </mat-chip-list>
-    </mat-cell>
-  </ng-container>
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef>Identifier</mat-header-cell>
+        <mat-cell *matCellDef="let project">{{project.id}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+        <mat-cell *matCellDef="let project">{{project.name}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="client">
+        <mat-header-cell *matHeaderCellDef>Client</mat-header-cell>
+        <mat-cell *matCellDef="let project">{{project.client}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="location">
+        <mat-header-cell *matHeaderCellDef>Location</mat-header-cell>
+        <mat-cell *matCellDef="let project">{{project.location}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="skillsUsed">
+        <mat-header-cell *matHeaderCellDef>Skills</mat-header-cell>
+        <mat-cell *matCellDef="let project">
+          <mat-chip-list>
+            <mat-chip *ngFor="let skill of project.skillsUsed">{{skill.name}}</mat-chip>
+          </mat-chip-list>
+        </mat-cell>
+      </ng-container>
 
-  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns" class="clickable" (click)="navigateToProject(row.id)"></mat-row>
-</mat-table>
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let row; columns: displayedColumns" class="clickable"
+               (click)="clickedOnProject(row.id);sidenav.toggle();"></mat-row>
+    </mat-table>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<mat-progress-spinner *ngIf="!dataSource.data[0]"
+                      class="spinner"
+                      mode="indeterminate">
+</mat-progress-spinner>
