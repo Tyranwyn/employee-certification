@@ -9,26 +9,26 @@
     <mat-cell *matCellDef="let project">{{project.id}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="name">
-    <mat-header-cell *matHeaderCellDef>First Name</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
     <mat-cell *matCellDef="let project">{{project.name}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="client">
-    <mat-header-cell *matHeaderCellDef>Last Name</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Client</mat-header-cell>
     <mat-cell *matCellDef="let project">{{project.client}}</mat-cell>
   </ng-container>
   <ng-container matColumnDef="location">
-    <mat-header-cell *matHeaderCellDef>Unit</mat-header-cell>
+    <mat-header-cell *matHeaderCellDef>Location</mat-header-cell>
     <mat-cell *matCellDef="let project">{{project.location}}</mat-cell>
   </ng-container>
-  <ng-container matColumnDef="skills">
+  <ng-container matColumnDef="skillsUsed">
     <mat-header-cell *matHeaderCellDef>Skills</mat-header-cell>
     <mat-cell *matCellDef="let project">
       <mat-chip-list>
-        <mat-chip *ngFor="let skill of project.skills">{{skill.name}}</mat-chip>
+        <mat-chip *ngFor="let skill of project.skillsUsed">{{skill.name}}</mat-chip>
       </mat-chip-list>
     </mat-cell>
   </ng-container>
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
-  <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns" class="clickable" (click)="navigateToProject(row.id)"></mat-row>
 </mat-table>

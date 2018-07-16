@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
+import { Router } from '@angular/router';
 import { ProjectListDto } from '../shared/project-list-dto';
+import { ProjectService } from '../shared/project.service';
 
 @Component({
   selector: 'app-project-list',
@@ -10,9 +12,10 @@ import { ProjectListDto } from '../shared/project-list-dto';
 export class ProjectListComponent implements OnInit {
 
   dataSource: MatTableDataSource<ProjectListDto> = new MatTableDataSource<ProjectListDto>();
-  displayedColumns = ['name', 'client', 'location', 'skills', 'skillsUsed'];
+  displayedColumns = ['name', 'client', 'location', 'skillsUsed'];
 
-  constructor() {
+  constructor(projectService: ProjectService, private router: Router) {
+    this.dataSource.data = projectService.getActiveProjects();
   }
 
   ngOnInit() {
@@ -29,4 +32,7 @@ export class ProjectListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  navigateToProject(id: string) {
+    this.router.navigate(['/projects/' + id]);
+  }
 }
