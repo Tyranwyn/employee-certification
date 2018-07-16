@@ -1,12 +1,12 @@
-import { Employee } from '../../employees/shared/employee.model';
-import { Skill } from '../../skills/shared/skill.model';
+import { DocumentReference } from 'angularfire2/firestore';
 
 export interface Project {
   id: string;
   name: string;
   client: string;
   location: string;
-  collaborators: Employee[];
-  responsible: Employee[];
-  skillsUsed: Skill[];
+  active: boolean;
+  collaborators: DocumentReference[];
+  responsible: DocumentReference[];
+  skillsUsed: DocumentReference[];
 }
