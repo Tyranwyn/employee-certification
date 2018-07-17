@@ -1,9 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
-import { Employee } from '../../employees/shared/employee.model';
 import { ProjectListDto } from '../shared/project-list-dto';
-import { Project } from '../shared/project.model';
 import { ProjectService } from '../shared/project.service';
 
 @Component({
@@ -15,9 +13,9 @@ export class ProjectListComponent implements OnInit {
 
   dataSource: MatTableDataSource<ProjectListDto> = new MatTableDataSource<ProjectListDto>();
   displayedColumns = ['name', 'client', 'location', 'skillsUsed'];
-  currentProject: Project;
-  currentProjectResponsible: Employee[] = [];
-  currentProjectCollaborators: Employee[] = [];
+
+  @Output()
+  currentProjectChange = new EventEmitter();
 
   constructor(private projectService: ProjectService, private router: Router) {
     this.dataSource.data = projectService.getActiveProjects();
@@ -37,26 +35,7 @@ export class ProjectListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  clickedOnProject(id: any) {
-    this.currentProjectResponsible = [];
-    this.currentProjectCollaborators = [];
-
-    this.projectService.getProjectById(id).subscribe(project => {
-      this.currentProject = project;
-      project.collaborators
-        .filter(coll => project.responsible.find(item => item.id === coll.id) === null)
-        .forEach(coll => {
-          coll.get()
-            .then(e => this.currentProjectCollaborators.push(e.data() as Employee))
-            .catch(err => console.log(err));
-        });
-      project.responsible
-        .filter(resp => project.responsible.find(item => item.id === resp.id) !== null)
-        .forEach(employee => {
-          employee.get()
-            .then(e => this.currentProjectResponsible.push(e.data() as Employee))
-            .catch(err => console.log(err));
-        });
-    });
+  clickOnProject(row) {
+    this.currentProjectChange.emit(row);
   }
 }

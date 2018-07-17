@@ -1,1 +1,12 @@
-<app-project-list></app-project-list>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav position="end" mode="side" class="project-sidenav-bar">
+    <app-project
+      [currentProject]="currentProject">
+    </app-project>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <app-project-list
+      (currentProjectChange)="onProjectClicked($event)">
+    </app-project-list>
+  </mat-sidenav-content>
+</mat-sidenav-container>

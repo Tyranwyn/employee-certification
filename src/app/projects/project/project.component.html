@@ -1,10 +1,46 @@
 <div *ngIf="currentProject">
-  <h1>{{currentProject.name}}</h1>
-  <p>Client: {{currentProject.client}}</p>
-  <p>Project still active? {{currentProject.active ? 'yes' : 'no'}}</p>
-  <p>Project location: {{currentProject.location}}</p>
+  <div style="margin: 4em 2em">
+    <h1><a [routerLink]="currentProject.id">{{currentProject.name}}</a></h1>
+    <p>Client: {{currentProject.client}}</p>
+    <!--<p>Project still active? {{currentProject.active ? 'yes' : 'no'}}</p>-->
+    <p>Project location: {{currentProject.location.name}}</p>
+  </div>
+  <div *ngIf="currentProjectResponsible.length != 0" style="margin: 2em 0">
+    <mat-card *ngFor="let employee of currentProjectResponsible">
+      <mat-card-header>
+        <div mat-card-avatar *ngIf="employee.profilePicture !== ''"
+             [style.background-image]="'url(' + employee.profilePicture + ')' | safe: 'style'"
+             style="background-position: center; background-size: cover;"></div>
+        <div mat-card-avatar *ngIf="employee.profilePicture === ''"
+             style="background: url('../../../assets/temp-profile-placeholder.png') center;background-size: cover;"></div>
+        <mat-card-title>{{employee.firstName}} {{employee.lastName}}</mat-card-title>
+        <mat-card-subtitle>{{employee.role}}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+  <div *ngIf="currentProjectCollaborators.length != 0" style="margin: 2em 0">
+    <mat-card *ngFor="let employee of currentProjectCollaborators">
+      <mat-card-header>
+        <div mat-card-avatar *ngIf="employee.profilePicture !== ''"
+             [style.background-image]="'url(' + employee.profilePicture + ')' | safe: 'style'"
+             style="background-position: center; background-size: cover;"></div>
+        <div mat-card-avatar *ngIf="employee.profilePicture === ''"
+             style="background: url('../../../assets/temp-profile-placeholder.png') center;background-size: cover;"></div>
+        <mat-card-title>{{employee.firstName}} {{employee.lastName}}</mat-card-title>
+        <mat-card-subtitle>{{employee.role}}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+  <agm-map style="width:100%; height:20em;"
+           [latitude]="currentProject.location.lat"
+           [longitude]="currentProject.location.lon"
+           [zoom]="14" >
+    <agm-marker [latitude]="currentProject.location.lat" [longitude]="currentProject.location.lon">
+      <agm-info-window>{{currentProject.location.name}}</agm-info-window>
+    </agm-marker>
+  </agm-map>
 </div>
 <mat-progress-spinner *ngIf="!currentProject"
-  class="spinner"
-  mode="indeterminate">
+                      class="spinner"
+                      mode="indeterminate">
 </mat-progress-spinner>
