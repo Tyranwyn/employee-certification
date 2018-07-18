@@ -1,5 +1,5 @@
 <mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search for id, name, client, location, skills used or collaborators.">
 </mat-form-field>
 
 <mat-table *ngIf="dataSource.data[0]" [dataSource]="dataSource">
@@ -31,7 +31,7 @@
 
   <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
   <mat-row *matRowDef="let row; columns: displayedColumns" class="clickable"
-           (click)="clickOnProject(row)"></mat-row>
+           (click)="openDrawer(row)"></mat-row>
 </mat-table>
 
 <mat-progress-spinner *ngIf="!dataSource.data[0]"

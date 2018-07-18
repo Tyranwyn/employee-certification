@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { MatTableDataSource } from '@angular/material';
 import { Router } from '@angular/router';
 import { ProjectListDto } from '../shared/project-list-dto';
@@ -35,7 +35,7 @@ export class ProjectListComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  clickOnProject(row) {
+  openDrawer(row) {
     this.currentProjectChange.emit(row);
   }
 }

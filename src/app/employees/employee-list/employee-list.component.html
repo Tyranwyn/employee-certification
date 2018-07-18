@@ -1,5 +1,5 @@
 <mat-form-field>
-  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search for id, first name, last name, role, unit, skill, certificate, project name, project client or project location.">
 </mat-form-field>
 
 <table mat-table *ngIf="dataSource.data[0]" [dataSource]="dataSource" multiTemplateDataRows>

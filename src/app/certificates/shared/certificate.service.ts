@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { Certificate } from './certificate.model';
 
 @Injectable()
 export abstract class CertificateService {
-  abstract getCertificates(): Certificate[];
-  abstract getCertificateById(id: string): Certificate;
+  abstract getCertificates(): Observable<Certificate[]>;
+  abstract getCertificateById(id: string): Observable<Certificate>;
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'app-certificates',
@@ -7,9 +8,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CertificatesComponent implements OnInit {
 
+  currentId: string;
+
+  @ViewChild('sidenav')
+  navbar: MatSidenav;
+
   constructor() { }
 
   ngOnInit() {
   }
 
+  clickedOnCertificate(id: string) {
+    this.currentId = id;
+    this.navbar.toggle();
+  }
 }

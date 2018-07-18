@@ -1,3 +1,8 @@
-<p>
-  certificate-list works!
-</p>
+<div *ngIf="certificates">
+  <mat-card *ngFor="let cert of certificates" (click)="openDrawer(cert.id)" class="cert-card clickable">
+    <mat-card-header>
+      <mat-card-title>{{cert.name}}</mat-card-title>
+    </mat-card-header>
+    <img mat-card-image [src]="cert.image | safe: 'resourceUrl'" [alt]="cert.name"/>
+  </mat-card>
+</div>
