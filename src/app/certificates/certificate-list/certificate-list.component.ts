@@ -37,20 +37,6 @@ export class CertificateListComponent implements OnChanges {
   }
 
   filterCertificatesBySkill() {
-    /*this.certificates.pipe(
-      map(certificates => certificates.filter(cert => {
-        /!*console.log(cert);
-        for (const skillId of this.skillsSelected) {
-          for (const certTechId of cert.technologies) {
-            if (skillId === certTechId.id) {
-              console.log(skillId);
-              return true;
-            }
-          }
-        }*!/
-        return false;
-      }))
-    );*/
     this.filteredCertificates = this.certificates.pipe(
       map(certs => certs.filter(cert => {
           for (const skillId of this.skillsSelected) {

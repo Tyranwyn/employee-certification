@@ -2,6 +2,7 @@
   <div style="margin: 4em 2em">
     <h1><a [routerLink]="currentCertificate.id">{{currentCertificate.name}}</a></h1>
   </div>
+  <img [src]="currentCertificate.image | safe: 'resourceUrl'" [alt]="currentCertificate.name"/>
   <div *ngIf="employeesWithCurrentCertificate.length != 0" style="margin: 2em 0">
     <mat-card *ngFor="let employee of employeesWithCurrentCertificate">
       <mat-card-header>

@@ -11,6 +11,7 @@ export class CertificatesComponent implements OnInit {
 
   currentId: string;
   skillsSelected: String[] = [];
+  isDrawerOpen = false;
 
   @ViewChild('sidenav')
   navbar: MatSidenav;
@@ -21,8 +22,14 @@ export class CertificatesComponent implements OnInit {
   }
 
   clickedOnCertificate(id: string) {
-    this.currentId = id;
-    this.navbar.toggle();
+    if (this.currentId !== id) {
+      this.currentId = id;
+      if (!this.isDrawerOpen) {
+        this.navbar.toggle(true);
+      }
+    } else {
+      this.navbar.toggle(false);
+    }
   }
 
   onFiltersChanged(skillsSelected: SkillCheckbox[]) {

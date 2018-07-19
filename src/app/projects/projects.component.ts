@@ -10,6 +10,7 @@ import { ProjectListDto } from './shared/project-list-dto';
 export class ProjectsComponent {
 
   currentProject: ProjectListDto;
+  isDrawerOpen = false;
 
   @ViewChild(MatSidenav)
   private sidenav: MatSidenav;
@@ -17,8 +18,14 @@ export class ProjectsComponent {
   constructor() { }
 
   onProjectClicked(currentProject: ProjectListDto) {
-    this.currentProject = currentProject;
-    this.sidenav.toggle();
+    if (this.currentProject !== currentProject) {
+      this.currentProject = currentProject;
+      if (!this.isDrawerOpen) {
+        this.sidenav.toggle(true);
+      }
+    } else {
+      this.sidenav.toggle(false);
+    }
   }
 
 }
