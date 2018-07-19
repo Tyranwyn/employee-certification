@@ -9,4 +9,5 @@ export abstract class EmployeeService {
   abstract getEmployeeById(id: string): Observable<Employee>;
   abstract getEmployedEmployees(): EmployeeListDto[];
   abstract getEmployedEmployeesObservable(): Observable<Employee[]>;
+  abstract getEmployeesByCertificateId(id: string): Observable<Employee[]>;
 }

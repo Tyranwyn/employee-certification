@@ -1,0 +1,22 @@
+<div *ngIf="currentCertificate">
+  <div style="margin: 4em 2em">
+    <h1><a [routerLink]="currentCertificate.id">{{currentCertificate.name}}</a></h1>
+  </div>
+  <div *ngIf="employeesWithCurrentCertificate.length != 0" style="margin: 2em 0">
+    <mat-card *ngFor="let employee of employeesWithCurrentCertificate">
+      <mat-card-header>
+        <div mat-card-avatar *ngIf="employee.profilePicture !== ''"
+             [style.background-image]="'url(' + employee.profilePicture + ')' | safe: 'style'"
+             style="background-position: center; background-size: cover;"></div>
+        <div mat-card-avatar *ngIf="employee.profilePicture === ''"
+             style="background: url('../../../assets/temp-profile-placeholder.png') center;background-size: cover;"></div>
+        <mat-card-title>{{employee.firstName}} {{employee.lastName}}</mat-card-title>
+        <mat-card-subtitle>{{employee.role}}</mat-card-subtitle>
+      </mat-card-header>
+    </mat-card>
+  </div>
+</div>
+<mat-progress-spinner *ngIf="!currentCertificate"
+                      class="spinner"
+                      mode="indeterminate">
+</mat-progress-spinner>

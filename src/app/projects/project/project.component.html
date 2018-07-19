@@ -2,7 +2,7 @@
   <div style="margin: 4em 2em">
     <h1><a [routerLink]="currentProject.id">{{currentProject.name}}</a></h1>
     <p>Client: {{currentProject.client}}</p>
-    <!--<p>Project still active? {{currentProject.active ? 'yes' : 'no'}}</p>-->
+    <!--<p>Project still active? {{currentCertificate.active ? 'yes' : 'no'}}</p>-->
     <p>Project location: {{currentProject.location.name}}</p>
   </div>
   <div *ngIf="currentProjectResponsible.length != 0" style="margin: 2em 0">

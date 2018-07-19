@@ -32,12 +32,15 @@ export class EmployeeFireStoreService implements EmployeeService {
           return actions.map(a => {
             const data = a.payload.doc.data() as Employee;
             const id = a.payload.doc.id;
-            console.log({id, ...data});
             return {id, ...data};
           });
         })
       );
     return employeeList;
+  }
+
+  getEmployeesByCertificateId(id: string): Observable<Employee[]> {
+    return undefined;
   }
 
   // TODO: Get references properly once eager loading implemented
