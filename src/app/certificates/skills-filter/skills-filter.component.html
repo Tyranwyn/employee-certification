@@ -1,0 +1,11 @@
+<div class="filter-container" *ngIf="skills.length != 0">
+  <h3>Skills Filter</h3>
+  <mat-checkbox *ngFor="let skill of skills"
+                [(ngModel)]="skill.checked"
+                [checked]="skill.checked"
+                [ngModelOptions]="{standalone: true}"
+                (change)="selectSkill()"
+                name="{{skill.id}}">
+    {{skill.name}}
+  </mat-checkbox>
+</div>

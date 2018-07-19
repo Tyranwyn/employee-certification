@@ -1,7 +1,11 @@
-.project-sidenav-bar {
+.certificate-sidenav-bar-right {
   position: fixed;
   top: 0;
   bottom: 0;
   left: 75%;
   right: 0;
+}
+
+.certificate-sidenav-bar-left {
+  width: 18em;
 }

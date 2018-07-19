@@ -1,12 +1,11 @@
 <mat-sidenav-container>
-  <mat-sidenav mode="side" opened>
-    <h3>Skills Filter</h3>
+  <mat-sidenav mode="side" opened class="certificate-sidenav-bar-left">
+    <app-skills-filter (skillsChange)="onFiltersChanged($event)"></app-skills-filter>
   </mat-sidenav>
-  <mat-sidenav #sidenav position="end" mode="side" class="project-sidenav-bar">
+  <mat-sidenav #sidenav position="end" mode="side" class="certificate-sidenav-bar-right">
     <app-certificate [currentCertificateId]="currentId"></app-certificate>
   </mat-sidenav>
   <mat-sidenav-content>
-    <h1>Certificates</h1>
-    <app-certificate-list (currentIdChange)="clickedOnCertificate($event)"></app-certificate-list>
+    <app-certificate-list (currentIdChange)="clickedOnCertificate($event)" [skillsSelected]="skillsSelected"></app-certificate-list>
   </mat-sidenav-content>
 </mat-sidenav-container>

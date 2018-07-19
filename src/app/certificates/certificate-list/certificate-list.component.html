@@ -1,5 +1,6 @@
-<div *ngIf="certificates">
-  <mat-card *ngFor="let cert of certificates" (click)="openDrawer(cert.id)" class="cert-card clickable">
+<div class="certificate-list-container">
+  <h1>Certificates</h1>
+  <mat-card *ngFor="let cert of filteredCertificates | async" (click)="openDrawer(cert.id)" class="cert-card clickable">
     <mat-card-header>
       <mat-card-title>{{cert.name}}</mat-card-title>
     </mat-card-header>
