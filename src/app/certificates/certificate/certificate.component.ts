@@ -20,6 +20,11 @@ export class CertificateComponent implements OnChanges {
 
   constructor(route: ActivatedRoute, private certificateService: CertificateService,
               private employeeService: EmployeeService) {
+    // If project accessed via url, convert to ProjectListDto
+    if (route.snapshot.params.id) {
+      this.currentCertificateId = route.snapshot.params.id;
+      this.getCertificateWithCorrespondingEmployees(this.currentCertificateId);
+    }
   }
 
   ngOnChanges(changes: SimpleChanges): void {
