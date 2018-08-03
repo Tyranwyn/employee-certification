@@ -22,7 +22,8 @@ export class NavComponent implements OnInit {
       {caption: 'Projects', link: ['/projects']},
       {caption: 'Certificates', link: ['/certificates']},
       {caption: 'Skills', link: ['/skills']},
-      {caption: 'Chat', link: ['/chat']}
+      {caption: 'Chat', link: ['/chat']},
+      {caption: 'Admin', link: ['/admin']}
     ];
   }
 }

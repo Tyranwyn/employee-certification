@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AdminComponent } from './admin/admin.component';
 import { CertificatesComponent } from './certificates/certificates.component';
 import { ChatComponent } from './chat/chat.component';
 import { EmployeesComponent } from './employees/employees.component';
@@ -12,5 +13,6 @@ export const appRoutes: Routes = [
   { path: 'projects', component: ProjectsComponent },
   { path: 'certificates', component: CertificatesComponent },
   { path: 'skills', component: SkillsComponent },
-  { path: 'chat', component: ChatComponent }
+  { path: 'chat', component: ChatComponent },
+  { path: 'admin', component: AdminComponent }
 ];

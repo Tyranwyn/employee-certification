@@ -24,10 +24,12 @@ import { QuestionService } from './questions/shared/question.service';
 import { SkillFireStoreService } from './skills/shared/skill-fire-store.service';
 import { SkillService } from './skills/shared/skill.service';
 import { SkillsModule } from './skills/skills.module';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,
