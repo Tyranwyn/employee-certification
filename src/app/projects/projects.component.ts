@@ -22,9 +22,12 @@ export class ProjectsComponent {
       this.currentProject = currentProject;
       if (!this.isDrawerOpen) {
         this.sidenav.toggle(true);
+        this.isDrawerOpen = true;
       }
     } else {
       this.sidenav.toggle(false);
+      this.isDrawerOpen = false;
+      this.currentProject = null;
     }
   }
 

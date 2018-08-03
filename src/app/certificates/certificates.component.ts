@@ -26,9 +26,12 @@ export class CertificatesComponent implements OnInit {
       this.currentId = id;
       if (!this.isDrawerOpen) {
         this.navbar.toggle(true);
+        this.isDrawerOpen = true;
       }
     } else {
       this.navbar.toggle(false);
+      this.isDrawerOpen = false;
+      this.currentId = null;
     }
   }
 
