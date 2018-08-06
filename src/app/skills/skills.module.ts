@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SkillListComponent } from './skill-list/skill-list.component';
 import { SkillsComponent } from './skills.component';
+import { AddSkillModalComponent } from './add-skill-modal/add-skill-modal.component';
 
 @NgModule({
   imports: [
@@ -10,7 +11,9 @@ import { SkillsComponent } from './skills.component';
   exports: [],
   declarations: [
     SkillsComponent,
-    SkillListComponent
-  ]
+    SkillListComponent,
+    AddSkillModalComponent
+  ],
+  entryComponents: [AddSkillModalComponent]
 })
 export class SkillsModule { }

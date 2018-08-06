@@ -74,21 +74,21 @@ export class EmployeeFireStoreService implements EmployeeService {
     if (null != oldEmployee.certificates && oldEmployee.certificates.length > 0) {
       oldEmployee.certificates.forEach(certificate =>
         certificate.get()
-          .then(res => newEmployee.certificates.push(<Certificate>res.data()))
+          .then(res => newEmployee.certificates.push(<Certificate>{ id: res.id, ...res.data() }))
           .catch(err => console.log(`Something went wrong with getting certificate: ${err}`))
       );
     }
     if (null != oldEmployee.skills && oldEmployee.skills.length > 0) {
       oldEmployee.skills.forEach(skill =>
         skill.get()
-          .then(res => newEmployee.skills.push(<Skill>res.data()))
+          .then(res => newEmployee.skills.push(<Skill>{ id: res.id, ...res.data() }))
           .catch(err => console.log(`Something went wrong with getting skill: ${err}`))
       );
     }
     if (null != oldEmployee.projects && oldEmployee.projects.length > 0) {
       oldEmployee.projects.forEach(project =>
         project.get()
-          .then(res => newEmployee.projects.push(<Project>res.data()))
+          .then(res => newEmployee.projects.push(<Project>{ id: res.id, ...res.data() }))
           .catch(err => console.log(`Something went wrong with getting project: ${err}`))
       );
     }

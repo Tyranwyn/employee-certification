@@ -10,6 +10,7 @@ import { CertificateComponent } from './certificate/certificate.component';
 import { CertificatesComponent } from './certificates.component';
 import { certificatesRoutes } from './certificates.routes';
 import { SkillsFilterComponent } from './skills-filter/skills-filter.component';
+import { AddCertificateModalComponent } from './add-certificate-modal/add-certificate-modal.component';
 
 @NgModule({
   imports: [
@@ -24,7 +25,9 @@ import { SkillsFilterComponent } from './skills-filter/skills-filter.component';
     CertificatesComponent,
     CertificateListComponent,
     CertificateComponent,
-    SkillsFilterComponent
-  ]
+    SkillsFilterComponent,
+    AddCertificateModalComponent
+  ],
+  entryComponents: [AddCertificateModalComponent]
 })
 export class CertificatesModule { }

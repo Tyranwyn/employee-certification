@@ -8,6 +8,7 @@ import { ProjectListComponent } from './project-list/project-list.component';
 import { ProjectsComponent } from './projects.component';
 import { projectsRoutes } from './projects.routes';
 import { AgmCoreModule } from '@agm/core';
+import { AddProjectModalComponent } from './add-project-modal/add-project-modal.component';
 
 @NgModule({
   imports: [
@@ -23,7 +24,9 @@ import { AgmCoreModule } from '@agm/core';
   declarations: [
     ProjectsComponent,
     ProjectComponent,
-    ProjectListComponent
-  ]
+    ProjectListComponent,
+    AddProjectModalComponent
+  ],
+  entryComponents: [AddProjectModalComponent]
 })
 export class ProjectsModule { }

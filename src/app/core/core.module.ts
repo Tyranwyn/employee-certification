@@ -6,6 +6,7 @@ import { MaterialModule } from './material/material.module';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { ToastModule } from './toast/toast.module';
 import { NavComponent } from './nav/nav.component';
+import { AddNewObjectSheetComponent } from './nav/add-new-object-sheet/add-new-object-sheet.component';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { NavComponent } from './nav/nav.component';
     MaterialModule,
     [NavComponent]
   ],
-  declarations: [NavComponent]
+  entryComponents: [AddNewObjectSheetComponent],
+  declarations: [NavComponent, AddNewObjectSheetComponent]
 })
 export class CoreModule {
   constructor( @Optional() @SkipSelf() parentModule: CoreModule) {
