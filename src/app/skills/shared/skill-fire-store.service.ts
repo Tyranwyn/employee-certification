@@ -26,10 +26,11 @@ export class SkillFireStoreService implements SkillService {
 
   addSkill(name: string): boolean {
     let success = false;
-    this.db.doc('skills').set({ name: name })
+    this.db.collection('skills').add({ name: name })
       .then(v => success = true)
       .catch(v => {
         success = false;
+        console.log('Something went wrong');
         console.log(v);
       });
     return success;

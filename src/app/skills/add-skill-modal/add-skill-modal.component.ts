@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material';
 import { MyErrorStateMatcher } from '../../core/my-error-state-matcher';
 import { Skill } from '../shared/skill.model';
 import { SkillService } from '../shared/skill.service';
@@ -18,7 +19,7 @@ export class AddSkillModalComponent implements OnInit {
 
   alreadyInSkills = false;
 
-  constructor(private skillService: SkillService) {
+  constructor(private skillService: SkillService, public dialogRef: MatDialogRef<AddSkillModalComponent>) {
   }
 
   ngOnInit() {
@@ -38,6 +39,11 @@ export class AddSkillModalComponent implements OnInit {
       }
       return this.alreadyInSkills ? { 'duplicateName': {value: control.value }} : null;
     };
+  }
+
+  addSkill() {
+    this.skillService.addSkill(this.name.value);
+    this.dialogRef.close();
   }
 
   get name() {
