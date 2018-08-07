@@ -5,4 +5,5 @@ import { Skill } from './skill.model';
 @Injectable()
 export abstract class SkillService {
   abstract getSkills(): Observable<Skill[]>;
+  abstract addSkill(name: string): boolean;
 }

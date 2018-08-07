@@ -1,3 +1,17 @@
-<p>
-  add-skill-modal works!
-</p>
+<div class="container">
+  <form *ngIf="skills" [formGroup]="skillForm">
+    <mat-form-field>
+      <input matInput placeholder="Name"
+             formControlName="name"
+             [errorStateMatcher]="matcher">
+      <mat-hint>Don't duplicate skills!</mat-hint>
+      <mat-error *ngIf="name.hasError('duplicateName')">
+        {{name.errors.duplicateName.value}} already exists.
+      </mat-error>
+      <mat-error *ngIf="name.hasError('required')">
+        Email is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <button mat-stroked-button [disabled]="!name.valid">Add</button>
+  </form>
+</div>

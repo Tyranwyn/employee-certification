@@ -1,12 +1,12 @@
-import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './material/material.module';
 import { throwIfAlreadyLoaded } from './module-import-guard';
-import { ToastModule } from './toast/toast.module';
-import { NavComponent } from './nav/nav.component';
 import { AddNewObjectSheetComponent } from './nav/add-new-object-sheet/add-new-object-sheet.component';
+import { NavComponent } from './nav/nav.component';
+import { ToastModule } from './toast/toast.module';
 
 @NgModule({
   imports: [

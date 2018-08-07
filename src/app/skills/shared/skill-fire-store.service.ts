@@ -23,4 +23,15 @@ export class SkillFireStoreService implements SkillService {
         })
       );
   }
+
+  addSkill(name: string): boolean {
+    let success = false;
+    this.db.doc('skills').set({ name: name })
+      .then(v => success = true)
+      .catch(v => {
+        success = false;
+        console.log(v);
+      });
+    return success;
+  }
 }

@@ -34,7 +34,7 @@ export class AddNewObjectSheetComponent implements OnInit {
   }
 
   addSkill() {
-    this.dialog.open(AddSkillModalComponent, {width: '60em'});
+    this.dialog.open(AddSkillModalComponent, {width: '20em'});
     this.sheetRef.dismiss();
   }
 }
