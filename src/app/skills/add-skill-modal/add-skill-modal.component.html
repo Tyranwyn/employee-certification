@@ -12,6 +12,9 @@
         Name is <strong>required</strong>
       </mat-error>
     </mat-form-field>
-    <button mat-stroked-button [disabled]="!name.valid" (click)="addSkill()">Add</button>
+    <div id="button-container">
+      <button mat-stroked-button [disabled]="!name.valid" (click)="addSkill()">Add</button>
+      <button mat-stroked-button (click)="dialogRef.close()" color="warn">Cancel</button>
+    </div>
   </form>
 </div>

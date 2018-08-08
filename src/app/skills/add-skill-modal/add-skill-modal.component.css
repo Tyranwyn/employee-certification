@@ -10,3 +10,16 @@ button {
 .container > * {
   width: 100%;
 }
+
+#button-container {
+  position: relative;
+}
+
+.mat-stroked-button {
+  width: 49%;
+}
+
+.mat-stroked-button:last-child {
+  position: absolute;
+  right: 0;
+}
