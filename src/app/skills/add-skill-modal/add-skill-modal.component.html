@@ -9,7 +9,7 @@
         {{name.errors.duplicateName.value}} already exists.
       </mat-error>
       <mat-error *ngIf="name.hasError('required')">
-        Email is <strong>required</strong>
+        Name is <strong>required</strong>
       </mat-error>
     </mat-form-field>
     <button mat-stroked-button [disabled]="!name.valid" (click)="addSkill()">Add</button>

@@ -1,5 +1,7 @@
 <mat-toolbar color="primary">
   <span>R Skillz</span>
   <a mat-button *ngFor="let item of menuItems" [routerLink]="item.link">{{item.caption}}</a>
-  <button mat-button (click)="openBottomSheet()">Add</button>
+  <button mat-icon-button (click)="openBottomSheet()">
+    <mat-icon>add</mat-icon>
+  </button>
 </mat-toolbar>

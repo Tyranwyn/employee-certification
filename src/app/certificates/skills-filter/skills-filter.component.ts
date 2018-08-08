@@ -19,9 +19,11 @@ export class SkillsFilterComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.skillService.getSkills().subscribe(skills =>
+    this.skillService.getSkills().subscribe(skills => {
+      this.skills = [];
       skills.forEach(skill =>
-        this.skills.push({...skill, checked: false})));
+        this.skills.push({...skill, checked: false}));
+    });
   }
 
   selectSkill() {

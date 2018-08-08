@@ -29,7 +29,7 @@ export class AddNewObjectSheetComponent implements OnInit {
   }
 
   addCertificate() {
-    this.dialog.open(AddCertificateModalComponent, {width: '60em'});
+    this.dialog.open(AddCertificateModalComponent, {width: '40em'});
     this.sheetRef.dismiss();
   }
 

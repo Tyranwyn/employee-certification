@@ -1,0 +1,38 @@
+form {
+  display: flex;
+  flex-direction: column;
+}
+
+button {
+  margin-top: 0.5em;
+}
+
+.container > * {
+  width: 100%;
+}
+
+#skills-container {
+  position: relative;
+}
+
+#skills {
+  width: 92%;
+}
+
+.mat-icon-button {
+  position: absolute;
+  right: 0;
+}
+
+.mat-icon-button:hover {
+  background-color: whitesmoke;
+}
+
+.mat-stroked-button {
+  width: 49%;
+}
+
+.mat-stroked-button:last-child {
+  position: absolute;
+  right: 0;
+}

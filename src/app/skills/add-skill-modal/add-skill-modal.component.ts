@@ -17,9 +17,8 @@ export class AddSkillModalComponent implements OnInit {
   skillForm: FormGroup;
   matcher = new MyErrorStateMatcher();
 
-  alreadyInSkills = false;
-
-  constructor(private skillService: SkillService, public dialogRef: MatDialogRef<AddSkillModalComponent>) {
+  constructor(private skillService: SkillService,
+              public dialogRef: MatDialogRef<AddSkillModalComponent>) {
   }
 
   ngOnInit() {
@@ -34,10 +33,13 @@ export class AddSkillModalComponent implements OnInit {
 
   duplicateSkillValidator(): ValidatorFn {
     return (control: AbstractControl): {[key: string]: any} | null => {
+      let alreadyInSkills = false;
       if (this.skills !== undefined) {
-        this.alreadyInSkills = this.skills.map(skill => skill.name).indexOf(this.name.value) !== -1;
+        alreadyInSkills = this.skills
+          .map(skill => skill.name.toLowerCase())
+          .indexOf(this.name.value.toLowerCase()) !== -1;
       }
-      return this.alreadyInSkills ? { 'duplicateName': {value: control.value }} : null;
+      return alreadyInSkills ? { 'duplicateName': {value: control.value }} : null;
     };
   }
 
