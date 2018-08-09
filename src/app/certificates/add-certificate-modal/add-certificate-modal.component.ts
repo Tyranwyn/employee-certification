@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material';
 import { MyErrorStateMatcher } from '../../core/my-error-state-matcher';
-import { AddNewObjectSheetComponent } from '../../core/nav/add-new-object-sheet/add-new-object-sheet.component';
 import { AddSkillModalComponent } from '../../skills/add-skill-modal/add-skill-modal.component';
 import { Skill } from '../../skills/shared/skill.model';
 import { SkillService } from '../../skills/shared/skill.service';

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from 'angularfire2/firestore';
+import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
 import { EmployeeListDto } from '../../employees/shared/employee-list-dto';
 import { Skill } from '../../skills/shared/skill.model';
+import { Location } from './location.model';
 import { ProjectListDto } from './project-list-dto';
 import { Project } from './project.model';
 import { ProjectService } from './project.service';
@@ -10,7 +11,8 @@ import { ProjectService } from './project.service';
 @Injectable()
 export class ProjectFireStoreService implements ProjectService {
 
-  constructor(private db: AngularFirestore) {}
+  constructor(private db: AngularFirestore) {
+  }
 
   getProjectById(id: string): Observable<Project> {
     return this.db.doc<Project>('/projects/' + id).valueChanges();
@@ -30,6 +32,10 @@ export class ProjectFireStoreService implements ProjectService {
       )
       .catch(err => console.log(err));
     return projectList;
+  }
+
+  getAllProjects(): Observable<Project[]> {
+    return this.db.collection<Project>('projects').valueChanges();
   }
 
   private convertProjectToProjectListDto(id: string, oldProject: Project): ProjectListDto {
@@ -64,5 +70,29 @@ export class ProjectFireStoreService implements ProjectService {
       );
     }
     return newProject;
+  }
+
+  addProject(name: string, client: string, location: Location, responsible: string[],
+             collaborators: string[], skills: string[], active: boolean): boolean {
+    let success = false;
+
+    const respRef: DocumentReference[] = [];
+    const collRef: DocumentReference[] = [];
+    const skillsRef: DocumentReference[] = [];
+    responsible.forEach(empl => respRef.push(this.db.doc('/employees/' + empl).ref));
+    collaborators.forEach(empl => collRef.push(this.db.doc('/employees/' + empl).ref));
+    skills.forEach(skill => skillsRef.push(this.db.doc('/skills/' + skill).ref));
+
+    this.db.collection('projects')
+      .add(
+        {name, client, location, responsible: respRef, collaborators: collRef, skillsUsed: skillsRef, active}
+      )
+      .then(v => success = true)
+      .catch(v => {
+        success = false;
+        console.log('Something went wrong');
+        console.log(v);
+      });
+    return success;
   }
 }

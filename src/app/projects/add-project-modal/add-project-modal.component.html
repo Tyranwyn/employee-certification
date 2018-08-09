@@ -1,3 +1,84 @@
-<p>
-  add-project-modal works!
-</p>
+<div class="container">
+  <form [formGroup]="projectForm" novalidate>
+    <mat-slide-toggle
+      [checked]="active">
+      Active
+    </mat-slide-toggle>
+    <mat-form-field>
+      <input matInput placeholder="Name"
+             formControlName="name"
+             [errorStateMatcher]="matcher">
+      <mat-hint>Don't duplicate certificates!</mat-hint>
+      <mat-error *ngIf="name.hasError('duplicateName')">
+        {{name.errors.duplicateName.value}} already exists.
+      </mat-error>
+      <mat-error *ngIf="name.hasError('required')">
+        Name is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput placeholder="Client"
+             formControlName="client"
+             [errorStateMatcher]="matcher">
+      <mat-error *ngIf="name.hasError('required')">
+        Client is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <input matInput #location
+             placeholder="Location"
+             formControlName="location"
+             [errorStateMatcher]="matcher">
+      <mat-error *ngIf="selectedLocation.hasError('locationNotSet')">
+        Please click on a suggested location.
+      </mat-error>
+      <mat-error *ngIf="selectedLocation.hasError('required')">
+        Location is <strong>required</strong>
+      </mat-error>
+    </mat-form-field>
+    <div id="relative-container">
+      <mat-form-field class="select">
+        <mat-select placeholder="Responsible" multiple formControlName="responsible">
+          <mat-option *ngFor="let responsible of employees" [value]="responsible.id">
+            {{responsible.firstName}} {{responsible.lastName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="responsibles.hasError('required')">
+          At least one responsible employee is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <button mat-icon-button (click)="addNewEmployee()">
+        <mat-icon>add</mat-icon>
+      </button>
+      <mat-form-field class="select">
+        <mat-select placeholder="Collaborators" multiple formControlName="collaborators">
+          <mat-option *ngFor="let collaborator of employees" [value]="collaborator.id">
+            {{collaborator.firstName}} {{collaborator.lastName}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="collaborators.hasError('required')">
+          At least one collaborating employee is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <button mat-icon-button (click)="addNewEmployee()">
+        <mat-icon>add</mat-icon>
+      </button>
+      <mat-form-field class="select">
+        <mat-select placeholder="Skills Used" multiple formControlName="skillsUsed">
+          <mat-option *ngFor="let skill of skillsUsed" [value]="skill.id">{{skill.name}}
+          </mat-option>
+        </mat-select>
+        <mat-error *ngIf="skills.hasError('required')">
+          At least one skill is <strong>required</strong>
+        </mat-error>
+      </mat-form-field>
+      <button mat-icon-button (click)="addNewSkill()">
+        <mat-icon>add</mat-icon>
+      </button>
+      <div id="button-container">
+        <button mat-stroked-button (click)="onSubmit()" [disabled]="projectForm.invalid">Add</button>
+        <button mat-stroked-button (click)="dialogRef.close()" color="warn">Cancel</button>
+      </div>
+    </div>
+  </form>
+</div>
