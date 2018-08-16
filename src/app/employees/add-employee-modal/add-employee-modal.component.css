@@ -1,8 +1,48 @@
-.container {
+form {
   display: flex;
   flex-direction: column;
 }
 
+button {
+  margin-top: 0.5em;
+}
+
 .container > * {
   width: 100%;
+  position: relative;
+}
+
+#relative-container {
+  position: relative;
+}
+
+#button-container {
+  position: relative;
+}
+
+.mat-stroked-button {
+  width: 49%;
+}
+
+.mat-stroked-button:last-child {
+  position: absolute;
+  right: 0;
+}
+
+.select {
+  width: 95%;
+}
+
+.mat-icon-button {
+  position: absolute;
+  right: 0;
+}
+
+.mat-icon-button:hover {
+  background-color: whitesmoke;
+}
+
+.mat-slide-toggle {
+  position: absolute;
+  right: 0;
 }

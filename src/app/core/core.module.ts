@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { NgModule, Optional, SkipSelf } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from '@angular/router';
+import { KeysPipe } from './keys.pipe';
 import { MaterialModule } from './material/material.module';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { AddNewObjectSheetComponent } from './nav/add-new-object-sheet/add-new-object-sheet.component';

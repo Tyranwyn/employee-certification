@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Certificate } from '../../certificates/shared/certificate.model';
 import { Project } from '../../projects/shared/project.model';
+import { Role } from '../../shared/role.enum';
+import { Unit } from '../../shared/unit.enum';
 import { Skill } from '../../skills/shared/skill.model';
 import { EmployeeListDto } from './employee-list-dto';
 import { Employee } from './employee.model';
@@ -13,7 +15,8 @@ import { EmployeeService } from './employee.service';
 export class EmployeeFireStoreService implements EmployeeService {
 
 
-  constructor(private db: AngularFirestore) {}
+  constructor(private db: AngularFirestore) {
+  }
 
   getEmployeeById(id: string): Observable<Employee> {
     return this.db.collection('employees').doc<Employee>(id).valueChanges();
@@ -74,24 +77,49 @@ export class EmployeeFireStoreService implements EmployeeService {
     if (null != oldEmployee.certificates && oldEmployee.certificates.length > 0) {
       oldEmployee.certificates.forEach(certificate =>
         certificate.get()
-          .then(res => newEmployee.certificates.push(<Certificate>{ id: res.id, ...res.data() }))
+          .then(res => newEmployee.certificates.push(<Certificate>{id: res.id, ...res.data()}))
           .catch(err => console.log(`Something went wrong with getting certificate: ${err}`))
       );
     }
     if (null != oldEmployee.skills && oldEmployee.skills.length > 0) {
       oldEmployee.skills.forEach(skill =>
         skill.get()
-          .then(res => newEmployee.skills.push(<Skill>{ id: res.id, ...res.data() }))
+          .then(res => newEmployee.skills.push(<Skill>{id: res.id, ...res.data()}))
           .catch(err => console.log(`Something went wrong with getting skill: ${err}`))
       );
     }
     if (null != oldEmployee.projects && oldEmployee.projects.length > 0) {
       oldEmployee.projects.forEach(project =>
         project.get()
-          .then(res => newEmployee.projects.push(<Project>{ id: res.id, ...res.data() }))
+          .then(res => newEmployee.projects.push(<Project>{id: res.id, ...res.data()}))
           .catch(err => console.log(`Something went wrong with getting project: ${err}`))
       );
     }
     return newEmployee;
+  }
+
+  addEmployee(firstName: string, lastName: string, email, profilePicture: string, role: Role,
+              unit: Unit, skills: string[], certificates: string[], employed: boolean): boolean {
+    let success = false;
+
+    console.log(skills);
+    console.log(certificates);
+
+    const skillsRef: DocumentReference[] = [];
+    const certificatesRef: DocumentReference[] = [];
+    skills.forEach(skill => skillsRef.push(this.db.doc('/skills/' + skill).ref));
+    certificates.forEach(cert => certificatesRef.push(this.db.doc('/certificates/' + cert).ref));
+
+    this.db.collection('employees')
+      .add(
+        {firstName, lastName, email, profilePicture, role, unit, skills: skillsRef, certificates: certificatesRef, projects: [], employed}
+      )
+      .then(v => success = true)
+      .catch(v => {
+        success = false;
+        console.log('Something went wrong');
+        console.log(v);
+      });
+    return success;
   }
 }

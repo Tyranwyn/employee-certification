@@ -20,7 +20,7 @@
       <input matInput placeholder="Client"
              formControlName="client"
              [errorStateMatcher]="matcher">
-      <mat-error *ngIf="name.hasError('required')">
+      <mat-error *ngIf="client.hasError('required')">
         Client is <strong>required</strong>
       </mat-error>
     </mat-form-field>
