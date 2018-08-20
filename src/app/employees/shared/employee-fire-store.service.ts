@@ -108,27 +108,36 @@ export class EmployeeFireStoreService implements EmployeeService {
     certificates.forEach(cert => certificatesRef.push(this.db.doc(`/certificates/${cert}`).ref));
 
     const id = this.db.createId();
+    const data = {
+      firstName,
+      lastName,
+      email,
+      role,
+      unit,
+      skills: skillsRef,
+      certificates: certificatesRef,
+      projects: [],
+      employed
+    };
+    if (profilePicture !== undefined) {
+      this.addEmplWithPicture(id, profilePicture, data);
+    } else {
+      this.addEmpl(id, '', data);
+    }
+    return id;
+  }
+
+  private addEmplWithPicture(id: string, profilePicture: File, data) {
     this.storage.upload(`profile-pictures/${id}`, profilePicture)
       .then(result => result.ref.getDownloadURL()
-        .then(url => {
-          this.db.doc(`employees/${id}`)
-            .set({
-              firstName,
-              lastName,
-              email,
-              profilePicture: url,
-              role,
-              unit,
-              skills: skillsRef,
-              certificates: certificatesRef,
-              projects: [],
-              employed
-            })
-            .then(res => console.log(res))
-            .catch(err => console.log(`Something went wrong:\n${err}`));
-        })
+        .then(url => this.addEmpl(id, url, data))
         .catch(res => console.log(`Something wrong when getting download url:\n${res}`)))
       .catch(result => console.log(`Something wrong while uploading profile picture:\n${result}`));
-    return id;
+  }
+
+  private addEmpl(id: string, url: string, data) {
+    this.db.doc(`employees/${id}`)
+      .set({ profilePicture: url, ...data })
+      .catch(err => console.log(`Something went wrong:\n${err}`));
   }
 }

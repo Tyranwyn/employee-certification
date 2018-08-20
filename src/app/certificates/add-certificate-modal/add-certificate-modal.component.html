@@ -12,10 +12,15 @@
         Name is <strong>required</strong>
       </mat-error>
     </mat-form-field>
-    <mat-form-field>
-      <input matInput placeholder="Image Url" formControlName="img">
-      <mat-hint>Don't choose an oversized image.</mat-hint>
-    </mat-form-field>
+    <image-upload
+      [max]="1"
+      [maxFileSize]="150000"
+      [extensions]="['jpg','png','gif']"
+      buttonCaption="Select"
+      dropBoxMessage="Select a profile picture!"
+      (uploadFinished)="selectFile($event)"
+      (removed)="profilePicture = null;">
+    </image-upload>
     <div id="skills-container">
       <mat-form-field id="skills">
         <mat-select placeholder="Skills" multiple formControlName="skills">
@@ -25,7 +30,7 @@
       <button mat-icon-button (click)="addNewSkill()">
         <mat-icon>add</mat-icon>
       </button>
-      <button mat-stroked-button [disabled]="!name.valid" (click)="addCertificate()">Add</button>
+      <button mat-stroked-button [disabled]="!name.valid" (click)="onSubmit()">Add</button>
       <button mat-stroked-button (click)="dialogRef.close()" color="warn">Cancel</button>
     </div>
   </form>

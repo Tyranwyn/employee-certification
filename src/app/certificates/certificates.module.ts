@@ -2,15 +2,15 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ImageUploadModule } from 'angular2-image-upload';
 import { SafePipeModule } from 'safe-pipe';
 import { MaterialModule } from '../core/material/material.module';
-import { SkillsModule } from '../skills/skills.module';
+import { AddCertificateModalComponent } from './add-certificate-modal/add-certificate-modal.component';
 import { CertificateListComponent } from './certificate-list/certificate-list.component';
 import { CertificateComponent } from './certificate/certificate.component';
 import { CertificatesComponent } from './certificates.component';
 import { certificatesRoutes } from './certificates.routes';
 import { SkillsFilterComponent } from './skills-filter/skills-filter.component';
-import { AddCertificateModalComponent } from './add-certificate-modal/add-certificate-modal.component';
 
 @NgModule({
   imports: [
@@ -19,7 +19,8 @@ import { AddCertificateModalComponent } from './add-certificate-modal/add-certif
     SafePipeModule,
     RouterModule.forRoot(certificatesRoutes),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ImageUploadModule.forRoot()
   ],
   declarations: [
     CertificatesComponent,

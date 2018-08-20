@@ -17,6 +17,7 @@ export class AddCertificateModalComponent implements OnInit {
 
   certificates: Certificate[];
   skills: Skill[];
+  profilePicture: File;
 
   certificateForm: FormGroup;
   matcher = new MyErrorStateMatcher();
@@ -35,7 +36,6 @@ export class AddCertificateModalComponent implements OnInit {
         Validators.required,
         this.duplicateSkillValidator()
       ]),
-      'img': new FormControl(),
       'skills': new FormControl()
     });
   }
@@ -52,20 +52,21 @@ export class AddCertificateModalComponent implements OnInit {
     };
   }
 
-  addCertificate() {
-    this.certificateService.addCertificate(this.name.value, this.img.value, this.selectedSkills.value);
+  onSubmit() {
+    this.certificateService.addCertificate(this.name.value, this.profilePicture, this.selectedSkills.value);
+    this.dialogRef.close();
   }
 
   addNewSkill() {
     this.dialog.open(AddSkillModalComponent, {width: '20em'});
   }
 
-  get name() {
-    return this.certificateForm.get('name');
+  selectFile(event) {
+    this.profilePicture = event.file;
   }
 
-  get img() {
-    return this.certificateForm.get('img');
+  get name() {
+    return this.certificateForm.get('name');
   }
 
   get selectedSkills() {

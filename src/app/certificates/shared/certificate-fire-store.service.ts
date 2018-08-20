@@ -30,19 +30,29 @@ export class CertificateFireStoreService implements CertificateService {
 
   addCertificate(name: string, img: File, skills: string[]): string {
     const skillsRef: DocumentReference[] = [];
-    skills.forEach(skill => skillsRef.push(this.db.doc('/skills/' + skill).ref));
+    skills.forEach(skill => skillsRef.push(this.db.doc(`/skills/${skill}`).ref));
 
     const id = this.db.createId();
+    if (img !== undefined) {
+      this.addCertWithImage(id, img, { name, skillsRef });
+    } else {
+      this.addCert(id, '', { name, skillsRef });
+    }
+
+    return id;
+  }
+
+  private addCertWithImage(id: string, img: File, data) {
     this.storage.upload(`certificates/${id}`, img)
       .then(result => result.ref.getDownloadURL()
-        .then(url => {
-          this.db.doc(`certificates/${id}`)
-            .set({name: name, image: url, technologies: skillsRef})
-            .then(res => console.log(res))
-            .catch(err => console.log(`Something went wrong:\n${err}`));
-        })
+        .then(url => this.addCert(id, url, data))
         .catch(res => console.log(`Something wrong when getting download url:\n${res}`)))
       .catch(result => console.log(`Something wrong while uploading certificate image:\n${result}`));
-    return id;
+  }
+
+  private addCert(id: string, url: string, data) {
+    this.db.doc(`certificates/${id}`)
+      .set({image: url, ...data})
+      .catch(err => console.log(`Something went wrong:\n${err}`));
   }
 }
