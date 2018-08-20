@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
+import { AngularFireStorage } from 'angularfire2/storage';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { finalize, map } from 'rxjs/operators';
 import { Certificate } from '../../certificates/shared/certificate.model';
 import { Project } from '../../projects/shared/project.model';
 import { Role } from '../../shared/role.enum';
@@ -15,7 +16,7 @@ import { EmployeeService } from './employee.service';
 export class EmployeeFireStoreService implements EmployeeService {
 
 
-  constructor(private db: AngularFirestore) {
+  constructor(private db: AngularFirestore, private storage: AngularFireStorage) {
   }
 
   getEmployeeById(id: string): Observable<Employee> {
@@ -62,6 +63,8 @@ export class EmployeeFireStoreService implements EmployeeService {
   }
 
   private convertEmployeeToEmployeeListDto(id: string, oldEmployee: Employee): EmployeeListDto {
+    const employeeRef = this.storage.ref('profile-pictures/' + id);
+
     const newEmployee: EmployeeListDto = {
       id: id,
       firstName: oldEmployee.firstName,
@@ -74,6 +77,9 @@ export class EmployeeFireStoreService implements EmployeeService {
       skills: [],
       projects: []
     };
+
+    employeeRef.getDownloadURL().subscribe(url => newEmployee.profilePicture = url);
+
     if (null != oldEmployee.certificates && oldEmployee.certificates.length > 0) {
       oldEmployee.certificates.forEach(certificate =>
         certificate.get()
@@ -98,12 +104,9 @@ export class EmployeeFireStoreService implements EmployeeService {
     return newEmployee;
   }
 
-  addEmployee(firstName: string, lastName: string, email, profilePicture: string, role: Role,
-              unit: Unit, skills: string[], certificates: string[], employed: boolean): boolean {
-    let success = false;
-
-    console.log(skills);
-    console.log(certificates);
+  addEmployee(firstName: string, lastName: string, email, profilePicture: File, role: Role,
+              unit: Unit, skills: string[], certificates: string[], employed: boolean): string {
+    let id = null;
 
     const skillsRef: DocumentReference[] = [];
     const certificatesRef: DocumentReference[] = [];
@@ -112,14 +115,32 @@ export class EmployeeFireStoreService implements EmployeeService {
 
     this.db.collection('employees')
       .add(
-        {firstName, lastName, email, profilePicture, role, unit, skills: skillsRef, certificates: certificatesRef, projects: [], employed}
+        {
+          firstName,
+          lastName,
+          email,
+          profilePicture: '',
+          role,
+          unit,
+          skills: skillsRef,
+          certificates: certificatesRef,
+          projects: [],
+          employed
+        }
       )
-      .then(v => success = true)
+      .then(v => {
+        id = v.id;
+        this.storeProfilePicture(id, profilePicture);
+      })
       .catch(v => {
-        success = false;
         console.log('Something went wrong');
         console.log(v);
       });
-    return success;
+    return id;
+  }
+
+  private storeProfilePicture(id: string, file: File) {
+    const filePath = 'profile-pictures/' + id;
+    const task = this.storage.upload(filePath, file);
   }
 }

@@ -9,7 +9,7 @@ export const environment = {
     authDomain: 'r-skillz.firebaseapp.com',
     databaseURL: 'https://r-skillz.firebaseio.com',
     projectId: 'r-skillz',
-    storageBucket: '',
+    storageBucket: 'r-skillz',
     messagingSenderId: '879486705712'
   }
 };

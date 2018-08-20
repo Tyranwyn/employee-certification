@@ -25,6 +25,7 @@ export class AddEmployeeModalComponent implements OnInit {
   employees: Employee[];
   skills: Skill[];
   certificates: Certificate[];
+  profilePicture: File;
 
   employeeForm: FormGroup;
   matcher = new MyErrorStateMatcher();
@@ -52,7 +53,6 @@ export class AddEmployeeModalComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      profilePicture: ['', ],
       role: ['', Validators.required],
       unit: ['', Validators.required],
       skills: ['', ],
@@ -61,7 +61,7 @@ export class AddEmployeeModalComponent implements OnInit {
   }
 
   onSubmit() {
-    this.employeeService.addEmployee(this.firstName.value, this.lastName.value, this.email.value, this.profilePicture.value,
+    this.employeeService.addEmployee(this.firstName.value, this.lastName.value, this.email.value, this.profilePicture,
       this.role.value, this.unit.value, this.skillsInput, this.certificatesInput, this.employed);
     this.dialogRef.close();
   }
@@ -74,6 +74,10 @@ export class AddEmployeeModalComponent implements OnInit {
     this.dialog.open(AddCertificateModalComponent, {width: '30em'});
   }
 
+  selectFile(event) {
+    this.profilePicture = event.file;
+  }
+
   get firstName() {
     return this.employeeForm.get('firstName');
   }
@@ -84,10 +88,6 @@ export class AddEmployeeModalComponent implements OnInit {
 
   get email() {
     return this.employeeForm.get('email');
-  }
-
-  get profilePicture() {
-    return this.employeeForm.get('profilePicture');
   }
 
   get role() {

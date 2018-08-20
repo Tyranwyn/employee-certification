@@ -39,11 +39,20 @@
         Email is <strong>required</strong>
       </mat-error>
     </mat-form-field>
-    <mat-form-field>
+    <!--<mat-form-field>
       <input matInput placeholder="Profile Picture"
              formControlName="profilePicture"
              [errorStateMatcher]="matcher">
-    </mat-form-field>
+    </mat-form-field>-->
+    <image-upload
+      [max]="1"
+      [maxFileSize]="150000"
+      [extensions]="['jpg','png','gif']"
+      buttonCaption="Select"
+      dropBoxMessage="Select a profile picture!"
+      (uploadFinished)="selectFile($event)"
+      (removed)="profilePicture = null;">
+    </image-upload>
     <mat-form-field>
       <mat-select placeholder="Role" formControlName="role">
         <mat-option *ngFor="let role of roles | keys" [value]="role.value">

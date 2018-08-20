@@ -17,6 +17,6 @@ export abstract class EmployeeService {
 
   abstract getEmployeesByCertificateId(id: string): Observable<Employee[]>;
 
-  abstract addEmployee(firstName: string, lastName: string, email: string, profilePicture: string, role: Role,
-                       unit: Unit, skills: string[], certificates: string[], employed: boolean): boolean;
+  abstract addEmployee(firstName: string, lastName: string, email: string, profilePicture: File, role: Role,
+                       unit: Unit, skills: string[], certificates: string[], employed: boolean): string;
 }

@@ -2,6 +2,8 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { ImageUploadModule } from 'angular2-image-upload';
+import { AngularFireStorage } from 'angularfire2/storage';
 import { SafePipeModule } from 'safe-pipe';
 import { KeysPipe } from '../core/keys.pipe';
 import { MaterialModule } from '../core/material/material.module';
@@ -16,7 +18,8 @@ import { EmployeesComponent } from './employees.component';
     MaterialModule,
     SafePipeModule,
     RouterModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ImageUploadModule.forRoot()
   ],
   exports: [],
   declarations: [
@@ -26,6 +29,7 @@ import { EmployeesComponent } from './employees.component';
     AddEmployeeModalComponent,
     KeysPipe
   ],
-  entryComponents: [AddEmployeeModalComponent]
+  entryComponents: [AddEmployeeModalComponent],
+  providers: [AngularFireStorage]
 })
 export class EmployeesModule { }
