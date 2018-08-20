@@ -63,8 +63,6 @@ export class EmployeeFireStoreService implements EmployeeService {
   }
 
   private convertEmployeeToEmployeeListDto(id: string, oldEmployee: Employee): EmployeeListDto {
-    const employeeRef = this.storage.ref('profile-pictures/' + id);
-
     const newEmployee: EmployeeListDto = {
       id: id,
       firstName: oldEmployee.firstName,
@@ -77,8 +75,6 @@ export class EmployeeFireStoreService implements EmployeeService {
       skills: [],
       projects: []
     };
-
-    employeeRef.getDownloadURL().subscribe(url => newEmployee.profilePicture = url);
 
     if (null != oldEmployee.certificates && oldEmployee.certificates.length > 0) {
       oldEmployee.certificates.forEach(certificate =>
@@ -106,41 +102,33 @@ export class EmployeeFireStoreService implements EmployeeService {
 
   addEmployee(firstName: string, lastName: string, email, profilePicture: File, role: Role,
               unit: Unit, skills: string[], certificates: string[], employed: boolean): string {
-    let id = null;
-
     const skillsRef: DocumentReference[] = [];
     const certificatesRef: DocumentReference[] = [];
-    skills.forEach(skill => skillsRef.push(this.db.doc('/skills/' + skill).ref));
-    certificates.forEach(cert => certificatesRef.push(this.db.doc('/certificates/' + cert).ref));
+    skills.forEach(skill => skillsRef.push(this.db.doc(`/skills/${skill}`).ref));
+    certificates.forEach(cert => certificatesRef.push(this.db.doc(`/certificates/${cert}`).ref));
 
-    this.db.collection('employees')
-      .add(
-        {
-          firstName,
-          lastName,
-          email,
-          profilePicture: '',
-          role,
-          unit,
-          skills: skillsRef,
-          certificates: certificatesRef,
-          projects: [],
-          employed
-        }
-      )
-      .then(v => {
-        id = v.id;
-        this.storeProfilePicture(id, profilePicture);
-      })
-      .catch(v => {
-        console.log('Something went wrong');
-        console.log(v);
-      });
+    const id = this.db.createId();
+    this.storage.upload(`profile-pictures/${id}`, profilePicture)
+      .then(result => result.ref.getDownloadURL()
+        .then(url => {
+          this.db.doc(`employees/${id}`)
+            .set({
+              firstName,
+              lastName,
+              email,
+              profilePicture: url,
+              role,
+              unit,
+              skills: skillsRef,
+              certificates: certificatesRef,
+              projects: [],
+              employed
+            })
+            .then(res => console.log(res))
+            .catch(err => console.log(`Something went wrong:\n${err}`));
+        })
+        .catch(res => console.log(`Something wrong when getting download url:\n${res}`)))
+      .catch(result => console.log(`Something wrong while uploading profile picture:\n${result}`));
     return id;
-  }
-
-  private storeProfilePicture(id: string, file: File) {
-    const filePath = 'profile-pictures/' + id;
-    const task = this.storage.upload(filePath, file);
   }
 }

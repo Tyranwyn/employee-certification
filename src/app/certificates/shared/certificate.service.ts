@@ -6,5 +6,5 @@ import { Certificate } from './certificate.model';
 export abstract class CertificateService {
   abstract getCertificates(): Observable<Certificate[]>;
   abstract getCertificateById(id: string): Observable<Certificate>;
-  abstract addCertificate(name: string, img: string, skills: string[]): boolean;
+  abstract addCertificate(name: string, img: File, skills: string[]): string;
 }
