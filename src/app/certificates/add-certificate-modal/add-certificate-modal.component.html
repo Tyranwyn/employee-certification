@@ -17,9 +17,9 @@
       [maxFileSize]="150000"
       [extensions]="['jpg','png','gif']"
       buttonCaption="Select"
-      dropBoxMessage="Select a profile picture!"
+      dropBoxMessage="Select a certificate image!"
       (uploadFinished)="selectFile($event)"
-      (removed)="profilePicture = null;">
+      (removed)="certificateImage = null;">
     </image-upload>
     <div id="skills-container">
       <mat-form-field id="skills">

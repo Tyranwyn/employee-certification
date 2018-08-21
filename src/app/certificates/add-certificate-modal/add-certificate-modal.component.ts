@@ -17,7 +17,7 @@ export class AddCertificateModalComponent implements OnInit {
 
   certificates: Certificate[];
   skills: Skill[];
-  profilePicture: File;
+  certificateImage: File;
 
   certificateForm: FormGroup;
   matcher = new MyErrorStateMatcher();
@@ -53,7 +53,7 @@ export class AddCertificateModalComponent implements OnInit {
   }
 
   onSubmit() {
-    this.certificateService.addCertificate(this.name.value, this.profilePicture, this.selectedSkills.value);
+    this.certificateService.addCertificate(this.name.value, this.certificateImage, this.selectedSkills.value);
     this.dialogRef.close();
   }
 
@@ -62,7 +62,7 @@ export class AddCertificateModalComponent implements OnInit {
   }
 
   selectFile(event) {
-    this.profilePicture = event.file;
+    this.certificateImage = event.file;
   }
 
   get name() {
