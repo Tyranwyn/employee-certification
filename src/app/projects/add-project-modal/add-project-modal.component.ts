@@ -46,7 +46,7 @@ export class AddProjectModalComponent implements OnInit {
 
   ngOnInit() {
     this.projectService.getAllProjects().subscribe(projects => this.projects = projects);
-    this.employeeService.getEmployedEmployeesObservable().subscribe(employees => this.employees = employees);
+    this.employeeService.getEmployedEmployees().subscribe(employees => this.employees = employees);
     this.skillService.getSkills().subscribe(skills => this.skillsUsed = skills);
 
     this.projectForm = this.fb.group({

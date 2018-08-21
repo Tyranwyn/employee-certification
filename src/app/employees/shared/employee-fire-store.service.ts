@@ -20,15 +20,22 @@ export class EmployeeFireStoreService implements EmployeeService {
   }
 
   getEmployeeById(id: string): Observable<Employee> {
-    return this.db.collection('employees').doc<Employee>(id).valueChanges();
+    return this.db.collection('employees').doc<Employee>(id)
+      .valueChanges();
   }
 
   getEmployees(): Observable<Employee[]> {
-    return this.db.collection<Employee>('employees').valueChanges();
+    return this.db.collection<Employee>('employees')
+      .valueChanges();
   }
 
-  getEmployedEmployeesObservable(): Observable<Employee[]> {
-    let employeeList: Observable<Employee[]>;
+  getEmployedEmployees(): Observable<Employee[]> {
+    return this.db.collection<Employee>('employees', ref => ref.where('employed', '==', true))
+      .valueChanges();
+  }
+
+  getEmployedEmployeeList(): Observable<EmployeeListDto[]> {
+    let employeeList: Observable<EmployeeListDto[]>;
     employeeList = this.db.collection<Employee>('employees', ref => ref.where('employed', '==', true))
       .snapshotChanges()
       .pipe(
@@ -36,7 +43,7 @@ export class EmployeeFireStoreService implements EmployeeService {
           return actions.map(a => {
             const data = a.payload.doc.data() as Employee;
             const id = a.payload.doc.id;
-            return {id, ...data};
+            return this.convertEmployeeToEmployeeListDto(id, data);
           });
         })
       );
@@ -44,22 +51,9 @@ export class EmployeeFireStoreService implements EmployeeService {
   }
 
   getEmployeesByCertificateId(id: string): Observable<Employee[]> {
-    return undefined;
-  }
-
-  // TODO: Get references properly once eager loading implemented
-  getEmployedEmployees(): EmployeeListDto[] {
-    const employeeList: EmployeeListDto[] = [];
-    this.db.collection<EmployeeListDto>('employees')
-      .ref
-      .where('employed', '==', true)
-      .get()
-      .then(res =>
-        res.forEach(doc =>
-          employeeList.push(this.convertEmployeeToEmployeeListDto(doc.id, <Employee>doc.data())))
-      )
-      .catch(err => console.log(err));
-    return employeeList;
+    return this.db.collection<Employee>('employees', ref =>
+      ref.where('certificates', 'array-contains', this.db.doc(`certificates/${id}`).ref))
+      .valueChanges();
   }
 
   private convertEmployeeToEmployeeListDto(id: string, oldEmployee: Employee): EmployeeListDto {

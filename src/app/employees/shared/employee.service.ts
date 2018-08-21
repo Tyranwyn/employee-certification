@@ -9,11 +9,11 @@ import { Employee } from './employee.model';
 export abstract class EmployeeService {
   abstract getEmployees(): Observable<Employee[]>;
 
+  abstract getEmployedEmployees(): Observable<Employee[]>;
+
   abstract getEmployeeById(id: string): Observable<Employee>;
 
-  abstract getEmployedEmployees(): EmployeeListDto[];
-
-  abstract getEmployedEmployeesObservable(): Observable<Employee[]>;
+  abstract getEmployedEmployeeList(): Observable<EmployeeListDto[]>;
 
   abstract getEmployeesByCertificateId(id: string): Observable<Employee[]>;
 

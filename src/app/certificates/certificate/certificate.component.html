@@ -6,8 +6,8 @@
     <mat-chip *ngFor="let technology of currentCertificate.technologies">{{technology.name}}</mat-chip>
   </div>-->
   <img [src]="currentCertificate.image | safe: 'resourceUrl'" [alt]="currentCertificate.name"/>
-  <div *ngIf="employeesWithCurrentCertificate.length != 0" style="margin: 2em 0">
-    <mat-card *ngFor="let employee of employeesWithCurrentCertificate">
+  <div style="margin: 2em 0">
+    <mat-card *ngFor="let employee of employeesWithCurrentCertificate | async">
       <mat-card-header>
         <div mat-card-avatar *ngIf="employee.profilePicture !== ''"
              [style.background-image]="'url(' + employee.profilePicture + ')' | safe: 'style'"

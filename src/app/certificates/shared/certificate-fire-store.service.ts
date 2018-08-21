@@ -13,7 +13,15 @@ export class CertificateFireStoreService implements CertificateService {
   }
 
   getCertificateById(id: string): Observable<Certificate> {
-    return this.db.doc<Certificate>('/certificates/' + id).valueChanges();
+    return this.db.doc<Certificate>('/certificates/' + id)
+      .snapshotChanges()
+      .pipe(
+        map(snapshot => {
+          const data = snapshot.payload.data();
+          const id = snapshot.payload.id;
+          return { id, ...data };
+        })
+      );
   }
 
   getCertificates(): Observable<Certificate[]> {

@@ -42,7 +42,6 @@ export class CertificateListComponent implements OnChanges {
           for (const skillId of this.skillsSelected) {
             for (const certTechId of cert.technologies) {
               if (skillId === certTechId.id) {
-                console.log(skillId);
                 return true;
               }
             }

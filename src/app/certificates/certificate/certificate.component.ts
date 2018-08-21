@@ -1,5 +1,6 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Observable } from 'rxjs';
 import { Employee } from '../../employees/shared/employee.model';
 import { EmployeeService } from '../../employees/shared/employee.service';
 import { Certificate } from '../shared/certificate.model';
@@ -16,7 +17,7 @@ export class CertificateComponent implements OnChanges {
   currentCertificateId: string;
 
   currentCertificate: Certificate;
-  employeesWithCurrentCertificate: Employee[] = [];
+  employeesWithCurrentCertificate: Observable<Employee[]>;
 
   constructor(route: ActivatedRoute, private certificateService: CertificateService,
               private employeeService: EmployeeService) {
@@ -28,7 +29,6 @@ export class CertificateComponent implements OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    this.employeesWithCurrentCertificate = [];
     if (this.currentCertificateId) {
       this.getCertificateWithCorrespondingEmployees(this.currentCertificateId);
     }
@@ -37,15 +37,7 @@ export class CertificateComponent implements OnChanges {
   getCertificateWithCorrespondingEmployees(id: string) {
     this.certificateService.getCertificateById(id).subscribe(value => {
       this.currentCertificate = value;
-      this.employeeService.getEmployedEmployeesObservable().subscribe(value1 => {
-        value1.forEach(empl => {
-          for (const cert of empl.certificates) {
-            if (cert.id === id) {
-              this.employeesWithCurrentCertificate.push(empl);
-            }
-          }
-        });
-      });
+      this.employeesWithCurrentCertificate = this.employeeService.getEmployeesByCertificateId(value.id);
     });
   }
 

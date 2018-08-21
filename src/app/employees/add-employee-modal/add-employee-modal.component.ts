@@ -41,7 +41,7 @@ export class AddEmployeeModalComponent implements OnInit {
 
   ngOnInit() {
     this.employeeService
-      .getEmployedEmployeesObservable()
+      .getEmployees()
       .subscribe(employees => this.employees = employees);
     this.skillService
       .getSkills()
