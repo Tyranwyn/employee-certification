@@ -2,7 +2,7 @@
   <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Search for id, first name, last name, role, unit, skill, certificate, project name, project client or project location.">
 </mat-form-field>
 
-<table mat-table [dataSource]="observableDataSource" multiTemplateDataRows>
+<table mat-table [dataSource]="dataSource" multiTemplateDataRows>
 
   <ng-container matColumnDef="id">
     <th mat-header-cell *matHeaderCellDef>Identifier</th>
@@ -68,7 +68,7 @@
       (click)="expandedElement = row"></tr>
   <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
-<mat-progress-spinner *ngIf="!observableDataSource"
+<mat-progress-spinner *ngIf="!dataSource.data"
                       class="spinner"
                       mode="indeterminate">
 </mat-progress-spinner>

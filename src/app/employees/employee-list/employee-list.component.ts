@@ -20,27 +20,25 @@ import { EmployeeService } from '../shared/employee.service';
 })
 export class EmployeeListComponent implements OnInit {
 
-  // dataSource: MatTableDataSource<EmployeeListDto> = new MatTableDataSource<EmployeeListDto>();
-  observableDataSource: Observable<EmployeeListDto[]>;
+  dataSource = new MatTableDataSource<EmployeeListDto>();
   expandedElement: Employee;
   displayedColumns = ['firstName', 'lastName', 'unit', 'skills', 'certificates', 'projects'];
 
   constructor(employeeService: EmployeeService) {
-    // this.dataSource.data = employeeService.getEmployedEmployees();
-    this.observableDataSource = employeeService.getEmployedEmployeeList();
+    employeeService.getEmployedEmployeeList().subscribe(list => this.dataSource.data = list);
   }
   ngOnInit() {
-    /*this.dataSource.filterPredicate = (data: EmployeeListDto, filter: string) => {
+    this.dataSource.filterPredicate = (data: EmployeeListDto, filter: string) => {
       let dataString = data.id + data.firstName + data.lastName + data.role + data.unit;
       data.skills.forEach(skill => dataString = dataString + skill.name);
       data.certificates.forEach(cert => dataString = dataString + cert.name);
       data.projects.forEach(project => dataString = dataString + project.name + project.client + project.location);
       dataString = dataString.toLowerCase();
       return dataString.indexOf(filter) !== -1;
-    };*/
+    };
   }
 
   applyFilter(filterValue: string) {
-    // this.dataSource.filter = filterValue.trim().toLowerCase();
+    this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 }
