@@ -30,13 +30,14 @@ export class EmployeeFireStoreService implements EmployeeService {
   }
 
   getEmployedEmployees(): Observable<Employee[]> {
-    return this.db.collection<Employee>('employees', ref => ref.where('employed', '==', true))
+    return this.db.collection<Employee>('employees',
+        ref => ref.where('employed', '==', true))
       .valueChanges();
   }
 
   getEmployedEmployeeList(): Observable<EmployeeListDto[]> {
-    let employeeList: Observable<EmployeeListDto[]>;
-    employeeList = this.db.collection<Employee>('employees', ref => ref.where('employed', '==', true))
+    return this.db.collection<Employee>('employees',
+        ref => ref.where('employed', '==', true))
       .snapshotChanges()
       .pipe(
         map(actions => {
@@ -47,7 +48,6 @@ export class EmployeeFireStoreService implements EmployeeService {
           });
         })
       );
-    return employeeList;
   }
 
   getEmployeesByCertificateId(id: string): Observable<Employee[]> {

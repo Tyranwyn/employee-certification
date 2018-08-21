@@ -6,7 +6,7 @@ import { Project } from './project.model';
 
 @Injectable()
 export abstract class ProjectService {
-  abstract getActiveProjects(): ProjectListDto[];
+  abstract getActiveProjectList(): Observable<ProjectListDto[]>;
 
   abstract getAllProjects(): Observable<Project[]>;
 

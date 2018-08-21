@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { EmployeeListDto } from '../../employees/shared/employee-list-dto';
 import { Skill } from '../../skills/shared/skill.model';
 import { Location } from './location.model';
@@ -18,20 +19,17 @@ export class ProjectFireStoreService implements ProjectService {
     return this.db.doc<Project>('/projects/' + id).valueChanges();
   }
 
-  // TODO: Get references properly once eager loading implemented
-  getActiveProjects(): ProjectListDto[] {
-    // return this.db.collection<EmployeeListDto>('employees', ref => ref.where('employed', '==', true)).valueChanges();
-    const projectList: ProjectListDto[] = [];
-    this.db.collection<ProjectListDto>('projects')
-      .ref
-      .where('active', '==', true)
-      .get()
-      .then(res =>
-        res.forEach(doc =>
-          projectList.push(this.convertProjectToProjectListDto(doc.id, <Project>doc.data())))
-      )
-      .catch(err => console.log(err));
-    return projectList;
+  getActiveProjectList(): Observable<ProjectListDto[]> {
+    return this.db.collection<Project>('projects',
+        ref => ref.where('active', '==', true))
+      .snapshotChanges()
+      .pipe(
+        map(actions => actions.map(a => {
+          const data = a.payload.doc.data() as Project;
+          const id = a.payload.doc.id;
+          return this.convertProjectToProjectListDto(id, data);
+        }))
+      );
   }
 
   getAllProjects(): Observable<Project[]> {

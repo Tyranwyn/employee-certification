@@ -11,14 +11,14 @@ import { ProjectService } from '../shared/project.service';
 })
 export class ProjectListComponent implements OnInit {
 
-  dataSource: MatTableDataSource<ProjectListDto> = new MatTableDataSource<ProjectListDto>();
+  dataSource = new MatTableDataSource<ProjectListDto>();
   displayedColumns = ['name', 'client', 'location', 'skillsUsed'];
 
   @Output()
   currentProjectChange = new EventEmitter();
 
   constructor(private projectService: ProjectService, private router: Router) {
-    this.dataSource.data = projectService.getActiveProjects();
+    projectService.getActiveProjectList().subscribe(list => this.dataSource.data = list);
   }
 
   ngOnInit() {
