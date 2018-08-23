@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
+import { MatSidenav } from '@angular/material';
 import { map } from 'rxjs/operators';
 import { Certificate } from '../shared/certificate.model';
 import { CertificateService } from '../shared/certificate.service';
@@ -16,9 +17,11 @@ export class CertificateListComponent implements OnChanges {
 
   @Input()
   skillsSelected: String[];
+  @Input()
+  navbar: MatSidenav;
 
   @Output()
-  currentIdChange = new EventEmitter();
+  certificateChanged = new EventEmitter<Certificate>();
 
   constructor(certificateService: CertificateService) {
     this.certificates = certificateService.getCertificates();
@@ -32,8 +35,8 @@ export class CertificateListComponent implements OnChanges {
     }
   }
 
-  openDrawer(id: string) {
-    this.currentIdChange.emit(id);
+  openDrawer(cert: Certificate) {
+    this.certificateChanged.emit(cert);
   }
 
   filterCertificatesBySkill() {

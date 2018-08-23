@@ -3,9 +3,9 @@
     <app-skills-filter (skillsChange)="onFiltersChanged($event)"></app-skills-filter>
   </mat-sidenav>
   <mat-sidenav #sidenav position="end" mode="side" class="certificate-sidenav-bar-right">
-    <app-certificate [currentCertificateId]="currentId"></app-certificate>
+    <app-certificate [currentCertificate]="currentCertificate"></app-certificate>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-certificate-list (currentIdChange)="clickedOnCertificate($event)" [skillsSelected]="skillsSelected"></app-certificate-list>
+    <app-certificate-list [navbar]="navbar" (certificateChanged)="clickedOnCertificate($event)" [skillsSelected]="skillsSelected"></app-certificate-list>
   </mat-sidenav-content>
 </mat-sidenav-container>

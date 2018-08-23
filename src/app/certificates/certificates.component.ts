@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material';
+import { Certificate } from './shared/certificate.model';
 import { SkillCheckbox } from './shared/skill-checkbox.model';
 
 @Component({
@@ -9,21 +10,23 @@ import { SkillCheckbox } from './shared/skill-checkbox.model';
 })
 export class CertificatesComponent implements OnInit {
 
-  currentId: string;
+  currentCertificate: Certificate;
   skillsSelected: String[] = [];
   isDrawerOpen = false;
 
   @ViewChild('sidenav')
   navbar: MatSidenav;
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
 
-  clickedOnCertificate(id: string) {
-    if (this.currentId !== id) {
-      this.currentId = id;
+  // TODO: FIXXXXXX DIZZZZ
+  clickedOnCertificate(certificate: Certificate) {
+    if (this.currentCertificate !== certificate) {
+      this.currentCertificate = certificate;
       if (!this.isDrawerOpen) {
         this.navbar.toggle(true);
         this.isDrawerOpen = true;
@@ -31,7 +34,7 @@ export class CertificatesComponent implements OnInit {
     } else {
       this.navbar.toggle(false);
       this.isDrawerOpen = false;
-      this.currentId = null;
+      this.currentCertificate = null;
     }
   }
 

@@ -1,6 +1,6 @@
 <div *ngIf="currentCertificate">
   <div style="margin: 4em 2em">
-    <h1><a [routerLink]="currentCertificateId">{{currentCertificate.name}}</a></h1>
+    <h1><a [routerLink]="currentCertificate.id">{{currentCertificate.name}}</a></h1>
   </div>
   <!--<div>
     <mat-chip *ngFor="let technology of currentCertificate.technologies">{{technology.name}}</mat-chip>
@@ -20,6 +20,7 @@
     </mat-card>
   </div>
 </div>
+<button mat-fab (click)="edit()"><mat-icon>edit</mat-icon></button>
 <mat-progress-spinner *ngIf="!currentCertificate"
                       class="spinner"
                       mode="indeterminate">

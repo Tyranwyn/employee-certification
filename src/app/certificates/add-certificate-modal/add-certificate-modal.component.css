@@ -1,3 +1,8 @@
+.container > * {
+  width: 100%;
+  position: relative;
+}
+
 form {
   display: flex;
   flex-direction: column;
@@ -7,15 +12,15 @@ button {
   margin-top: 0.5em;
 }
 
-.container > * {
-  width: 100%;
+image-upload {
+  margin: 0.3em 0 0.3em 0;
 }
 
-#skills-container {
+#technologies-container {
   position: relative;
 }
 
-#skills {
+#technologies {
   width: 92%;
 }
 
@@ -34,5 +39,12 @@ button {
 
 .mat-stroked-button:last-child {
   position: absolute;
+  right: 0;
+}
+
+.mat-fab {
+  position: absolute;
+  margin: 0;
+  top: 0;
   right: 0;
 }
