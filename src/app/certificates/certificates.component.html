@@ -6,6 +6,6 @@
     <app-certificate [currentCertificate]="currentCertificate"></app-certificate>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-certificate-list [navbar]="navbar" (certificateChanged)="clickedOnCertificate($event)" [skillsSelected]="skillsSelected"></app-certificate-list>
+    <app-certificate-list (certificateChanged)="clickedOnCertificate($event)" [skillsSelected]="skillsSelected"></app-certificate-list>
   </mat-sidenav-content>
 </mat-sidenav-container>

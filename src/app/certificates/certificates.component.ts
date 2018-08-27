@@ -23,7 +23,6 @@ export class CertificatesComponent implements OnInit {
   ngOnInit() {
   }
 
-  // TODO: FIXXXXXX DIZZZZ
   clickedOnCertificate(certificate: Certificate) {
     if (this.currentCertificate !== certificate) {
       this.currentCertificate = certificate;

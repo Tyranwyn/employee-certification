@@ -1,5 +1,5 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSidenav } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AddEmployeeModalComponent } from '../../employees/add-employee-modal/add-employee-modal.component';
@@ -46,7 +46,9 @@ export class CertificateComponent implements OnChanges {
   edit() {
     this.dialog.open(AddCertificateModalComponent, {
       width: '40em',
-      data: { cert: this.currentCertificate}
+      data: {
+        cert: this.currentCertificate,
+      }
     });
   }
 

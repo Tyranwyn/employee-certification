@@ -17,8 +17,6 @@ export class CertificateListComponent implements OnChanges {
 
   @Input()
   skillsSelected: String[];
-  @Input()
-  navbar: MatSidenav;
 
   @Output()
   certificateChanged = new EventEmitter<Certificate>();
