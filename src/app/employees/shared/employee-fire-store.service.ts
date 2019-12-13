@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference } from '@angular/firefirestore';
-import { AngularFireStorage } from '@angular/firestorage';
+import { AngularFirestore, DocumentReference } from '@angular/fire/firestore';
+import { AngularFireStorage } from '@angular/fire/storage';
 import { Observable } from 'rxjs';
 import { finalize, map } from 'rxjs/operators';
 import { Certificate } from '../../certificates/shared/certificate.model';

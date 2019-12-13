@@ -23,8 +23,8 @@ import { QuestionService } from './questions/shared/question.service';
 import { SkillFireStoreService } from './skills/shared/skill-fire-store.service';
 import { SkillService } from './skills/shared/skill.service';
 import { SkillsModule } from './skills/skills.module';
-import {AngularFireModule} from '@angular/fire';
-import {AngularFirestoreModule} from '@angular/fire/firestore';
+import {AngularFireModule} from '@angular/fire/';
+import {AngularFirestoreModule} from '@angular/fire//firestore';
 
 @NgModule({
   declarations: [

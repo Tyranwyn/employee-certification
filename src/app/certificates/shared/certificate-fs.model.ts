@@ -1,4 +1,4 @@
-import { DocumentReference } from '@angular/firefirestore';
+import { DocumentReference } from '@angular/fire/firestore';
 
 export interface CertificateFs {
   name: string;

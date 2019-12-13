@@ -1,4 +1,4 @@
-import { DocumentReference } from '@angular/firefirestore';
+import { DocumentReference } from '@angular/fire/firestore';
 import { Role } from '../../shared/role.enum';
 import { Unit } from '../../shared/unit.enum';
 
