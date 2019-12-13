@@ -1,8 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { environment } from '../environments/environment';
 import { AdminComponent } from './admin/admin.component';
 
@@ -13,7 +11,6 @@ import { CertificateFireStoreService } from './certificates/shared/certificate-f
 import { CertificateService } from './certificates/shared/certificate.service';
 import { ChatModule } from './chat/chat.module';
 import { CoreModule } from './core/core.module';
-import { KeysPipe } from './core/keys.pipe';
 import { EmployeesModule } from './employees/employees.module';
 import { EmployeeFireStoreService } from './employees/shared/employee-fire-store.service';
 import { EmployeeService } from './employees/shared/employee.service';
@@ -26,6 +23,8 @@ import { QuestionService } from './questions/shared/question.service';
 import { SkillFireStoreService } from './skills/shared/skill-fire-store.service';
 import { SkillService } from './skills/shared/skill.service';
 import { SkillsModule } from './skills/skills.module';
+import {AngularFireModule} from '@angular/fire';
+import {AngularFirestoreModule} from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
