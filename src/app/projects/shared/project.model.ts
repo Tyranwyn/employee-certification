@@ -1,4 +1,4 @@
-import { DocumentReference } from 'angularfire2/firestore';
+import { DocumentReference } from '@angular/firefirestore';
 import { Location } from './location.model';
 
 export interface Project {

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { UUID } from 'angular2-uuid';
-import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
-import { AngularFireStorage } from 'angularfire2/storage';
+import { AngularFirestore, DocumentReference } from '@angular/firefirestore';
+import { AngularFireStorage } from '@angular/firestorage';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Certificate } from './certificate.model';

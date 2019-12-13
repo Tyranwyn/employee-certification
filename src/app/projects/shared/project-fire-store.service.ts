@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, DocumentReference } from 'angularfire2/firestore';
+import { AngularFirestore, DocumentReference } from '@angular/firefirestore';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { EmployeeListDto } from '../../employees/shared/employee-list-dto';

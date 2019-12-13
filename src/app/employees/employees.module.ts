@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ImageUploadModule } from 'angular2-image-upload';
-import { AngularFireStorage } from 'angularfire2/storage';
+import { AngularFireStorage } from '@angular/firestorage';
 import { SafePipeModule } from 'safe-pipe';
 import { KeysPipe } from '../core/keys.pipe';
 import { MaterialModule } from '../core/material/material.module';
