@@ -5,12 +5,13 @@
 export const environment = {
   production: false,
   firebase: {
-    apiKey: 'AIzaSyA9gPee6783Wk-KRg6TR0MuTg-j1j687f4',
+    apiKey: 'AIzaSyBG1dl7t8N3IB2oZa-WwBogzb14m6aQ7Uc',
     authDomain: 'r-skillz.firebaseapp.com',
     databaseURL: 'https://r-skillz.firebaseio.com',
     projectId: 'r-skillz',
-    storageBucket: 'r-skillz',
-    messagingSenderId: '879486705712'
+    storageBucket: 'r-skillz.appspot.com',
+    messagingSenderId: '879486705712',
+    appId: '1:879486705712:web:fe0895d9f0f4adff300df5'
   }
 };
 
