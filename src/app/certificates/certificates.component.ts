@@ -14,7 +14,7 @@ export class CertificatesComponent implements OnInit {
   skillsSelected: String[] = [];
   isDrawerOpen = false;
 
-  @ViewChild('sidenav')
+  @ViewChild('sidenav', { static: true })
   navbar: MatSidenav;
 
   constructor() {

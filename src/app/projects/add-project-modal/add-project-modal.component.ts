@@ -1,3 +1,4 @@
+/// <reference types="googlemaps" />
 import { MapsAPILoader } from '@agm/core';
 import { Component, ElementRef, NgZone, OnInit, ViewChild } from '@angular/core';
 import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -12,7 +13,6 @@ import { SkillService } from '../../skills/shared/skill.service';
 import { Location } from '../shared/location.model';
 import { Project } from '../shared/project.model';
 import { ProjectService } from '../shared/project.service';
-import {} from 'googlemaps';
 
 @Component({
   selector: 'app-add-project-modal',
@@ -31,7 +31,7 @@ export class AddProjectModalComponent implements OnInit {
   active = true;
   location: Location;
 
-  @ViewChild('location')
+  @ViewChild('location', { static: true })
   public locationElementRef: ElementRef;
 
   constructor(private projectService: ProjectService,

@@ -12,7 +12,7 @@ export class ProjectsComponent {
   currentProject: ProjectListDto;
   isDrawerOpen = false;
 
-  @ViewChild(MatSidenav)
+  @ViewChild(MatSidenav, { static: true })
   private sidenav: MatSidenav;
 
   constructor() { }
